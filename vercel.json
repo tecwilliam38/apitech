@@ -1,0 +1,11 @@
+{
+    "version": 2,
+    "name": "apitech",
+    "public": true,
+    "builds": [
+       { "src": "src/index.js", "use": "@vercel/node" }
+    ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "src/index.js" }
+  ]  
+ }
