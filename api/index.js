@@ -11,9 +11,9 @@ app.use(cors());
 app.use(router);
 app.use(bodyParser.json());
 
-// app.listen(3001, ()=>{
-//     console.log("Aplicação rodando na porta:3001");    
-// })
+app.listen(3001, ()=>{
+    console.log("Aplicação rodando na porta:3001");    
+})
 
 
 export default app;
