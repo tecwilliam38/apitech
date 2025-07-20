@@ -17,35 +17,35 @@ async function InserirClient(client_name, doc_id, endereco_rua, endereco_bairro,
 
 async function ProfileClient(id_client) {
 
-    const client = await repoClient.ProfileClient(id_client);
+    const client = await clientRepo.ProfileClient(id_client);
 
     return client;
 }
 
 
-// async function Listar() {
+async function ListarClient() {
 
-//     const client = await repoClient.Listar();
+    const client = await clientRepo.ListarClient();
 
-//     return client;
-// }
+    return client;
+}
 
 // async function Editar(id_client, name, email, phone_number) {
 
-//     const client = await repoClient.Editar(id_client, name, email, phone_number);
+//     const client = await clientRepo.Editar(id_client, name, email, phone_number);
 
 //     return client;
 // }
 
 // async function Excluir(id_client) {
 
-//     const client = await repoClient.Excluir(id_client);
+//     const client = await clientRepo.Excluir(id_client);
 
 //     return client;
 // }
 // async function Buscar(termo) {
 //     try {
-//         const resultado = await repoClient.Buscar(termo);
+//         const resultado = await clientRepo.Buscar(termo);
 //         return resultado;
 //     } catch (err) {
 //         console.error(err);
@@ -53,4 +53,4 @@ async function ProfileClient(id_client) {
 //     }
 // }
 
-export default {InserirClient, ProfileClient}
+export default {InserirClient, ProfileClient, ListarClient}

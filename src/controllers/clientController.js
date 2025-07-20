@@ -12,23 +12,23 @@ async function InserirClient(req, res) {
 async function ProfileClient(req, res) {
 
     const id_client = req.id_client;
-    const client = await serviceClient.ProfileClient(id_client);
+    const client = await clientService.ProfileClient(id_client);
 
     res.status(200).json(client);
 }
-// async function ListarClient(req, res) {
+async function ListarClient(req, res) {
 
-//     const client = await serviceClient.Listar();
+    const client = await clientService.ListarClient();
 
-//     res.status(200).json(client);
-// }
+    res.status(200).json(client);
+}
 // async function EditarClient(req, res) {
 
 //     const id_client = req.params.id_client;
 //     const { name, doc_id, endereco_rua, endereco_bairro,
 //     endereco_cidade, phone_contato, task, email, password} = req.body;
 
-//     const client = await serviceClient.Editar(id_client, name, doc_id, endereco_rua, endereco_bairro,
+//     const client = await clientService.Editar(id_client, name, doc_id, endereco_rua, endereco_bairro,
 //     endereco_cidade, phone_contato, task, email, password);
 
 //     res.status(200).json(client);
@@ -38,7 +38,7 @@ async function ProfileClient(req, res) {
 
 //     const id_client = req.params.id_client;
 
-//     const client = await serviceClient.Excluir(id_client);
+//     const client = await clientService.Excluir(id_client);
 
 //     res.status(200).json(client);
 // }
@@ -46,7 +46,7 @@ async function ProfileClient(req, res) {
 
 //     const { termo } = req.body; 
 //     try {
-//         const resultado = await serviceClient.Buscar(termo);
+//         const resultado = await clientService.Buscar(termo);
 //         res.status(200).json(resultado);
 //     } catch (err) {
 //         console.error(err);
@@ -54,4 +54,4 @@ async function ProfileClient(req, res) {
 //     }
 // }
 
-export default { InserirClient, ProfileClient }
+export default { InserirClient, ProfileClient, ListarClient }

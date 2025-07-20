@@ -1,11 +1,12 @@
 
 import bcrypt from "bcrypt";
 import jwt from "../token.js";
+import adminRepo from "../repositories/adminRepo.js";
 
 async function InserirAdmin(name, email, phone_number, password) {
 
     const hashPassword = await bcrypt.hash(password, 10);
-    const admin = await repoAdmin.InserirAdmin(name, email, phone_number, hashPassword);
+    const admin = await adminRepo.InserirAdmin(name, email, phone_number, hashPassword);
 
     admin.token = jwt.CreateToken(admin.id_admin);
 
@@ -13,7 +14,7 @@ async function InserirAdmin(name, email, phone_number, password) {
 }
 async function LoginAdmin(email, password) {
 
-    const admin = await repoAdmin.ListarByEmailAdmin(email);
+    const admin = await adminRepo.ListarByEmailAdmin(email);
 
     if (!admin)
         return null;
@@ -37,21 +38,21 @@ async function ProfileAdmin(id_admin) {
 
 async function ListarAdmin() {
 
-    const userAdmin = await repoAdmin.ListarAdmin();
+    const userAdmin = await adminRepo.ListarAdmin();
 
     return userAdmin;
 }
 
 async function EditarAdmin(id_admin, name, email, phone_number) {
 
-    const userAdmin = await repoAdmin.EditarAdmin(id_admin, name, email, phone_number);
+    const userAdmin = await adminRepo.EditarAdmin(id_admin, name, email, phone_number);
 
     return userAdmin;
 }
 
 async function ExcluirAdmin(id_admin) {
 
-    const userAdmin = await repoAdmin.ExcluirAdmin(id_admin);
+    const userAdmin = await adminRepo.ExcluirAdmin(id_admin);
 
     return userAdmin;
 }

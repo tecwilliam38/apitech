@@ -1,4 +1,4 @@
-import pool from "../database/pool.index.js";
+import pool from "../database/db.js";
 
 async function verificaEmailExistente(email) {
     try {

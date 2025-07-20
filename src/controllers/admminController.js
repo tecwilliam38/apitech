@@ -9,18 +9,18 @@ async function InserirAdmin(req, res) {
 
     res.status(201).json(user);
 }
-// async function LoginAdmin(req, res) {
+async function LoginAdmin(req, res) {
 
-//     const { email, password } = req.body;
+    const { email, password } = req.body;
 
-//     const userAdmin = await serviceAdmin.LoginAdmin(email, password);
+    const userAdmin = await adminService.LoginAdmin(email, password);
 
-//     // if (user.length == 0)
-//     if (!userAdmin)
-//         res.status(401).json({ error: "E-mail ou senha inválida" });
-//     else
-//         res.status(200).json(userAdmin);
-// }
+    // if (user.length == 0)
+    if (!userAdmin)
+        res.status(401).json({ error: "E-mail ou senha inválida" });
+    else
+        res.status(200).json(userAdmin);
+}
 // async function ListarAdmin(req, res) {
 
 //     const userAdmin = await serviceAdmin.ListarAdmin();
@@ -47,4 +47,4 @@ async function InserirAdmin(req, res) {
 //     res.status(200).json(userAdmin);
 // }
 
-export default {InserirAdmin}
+export default {InserirAdmin, LoginAdmin}

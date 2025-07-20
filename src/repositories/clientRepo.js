@@ -48,13 +48,13 @@ async function ProfileClient(id_client) {
     const client = await pool.query(sql, [id_client]);
     return client.rows[0];
 }
-// async function Listar() {
+async function ListarClient() {
 
-//     let sql = `select id_client, name, doc_id as inep, endereco_rua, endereco_bairro, 
-//     task as tarefa, endereco_cidade, phone_contato, email from apitech_client order by name`;
-//     const clients = await pool.query(sql, []);
-//     return clients.rows;
-// }
+    let sql = `select id_client, client_name, doc_id as inep, endereco_rua, endereco_bairro, 
+    task as tarefa, endereco_cidade, endereco_uf, phone_contato, email from apitech_client order by client_name`;
+    const clients = await pool.query(sql, []);
+    return clients.rows;
+}
 
 // async function Editar(id_client, name, email, phone_number) {
 
@@ -88,4 +88,4 @@ async function ProfileClient(id_client) {
 //     }
 // }
 
-export default {InserirClient, ProfileClient}
+export default {InserirClient, ProfileClient, ListarClient}
