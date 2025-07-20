@@ -77,9 +77,7 @@ async function ExcluirTecnico(id_tecnico) {
 
     return { id_tecnico };
 }
-async function ListarServicos(id_tecnico) {
-    // o erro estava no pool.query, onde faltava o pool
-
+async function ListarTecnicoServicos(id_tecnico) {
     let sql = `select pts.id_service, s.description, pts.price
     from apitech_tecnicos_services pts
     join apitech_services s on (s.id_service = pts.id_service)
@@ -91,5 +89,5 @@ async function ListarServicos(id_tecnico) {
     return serv_tecnico.rows;
 }
 
-export default { InserirTecnico, ListarByEmail, ListarTecnico, EditarTecnico, ListarServicos }
+export default { InserirTecnico, ListarByEmail, ListarTecnico, EditarTecnico, ListarTecnicoServicos, ExcluirTecnico }
 

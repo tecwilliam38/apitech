@@ -18,7 +18,7 @@ import tecnicoController from "./controllers/tecnicoController.js";
 router.post("/client/register", clientController.InserirClient);
 router.get("/client/profile",jwt.ValidateToken, clientController.ProfileClient);
 router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
-// router.put("/client/:id_client", jwt.ValidateToken, controllerClient.Editar);
+router.put("/client/:id_client", jwt.ValidateToken, clientController.EditarClient);
 router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient );
 
 // Rotas do Admin...
@@ -31,7 +31,7 @@ router.post("/admin/login", admminController.LoginAdmin);
 router.post("/tecnicos/register", jwt.ValidateToken, tecnicoController.InserirTecnico);
 router.post("/tecnicos/login", tecnicoController.LoginTecnico);
 router.get("/tecnicos/listar", jwt.ValidateToken, tecnicoController.ListarTecnico);
-// router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, controllerTecnico.ListarServicos);
+router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, tecnicoController.ListarServicosTecnico);
 
 // Appointments
 // router.post("/appointments/insert", jwt.ValidateToken, controllerAppointment.Inserir);

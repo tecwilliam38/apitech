@@ -40,21 +40,21 @@ async function EditarTecnico(req, res) {
     res.status(200).json(tecnico);
 }
 
-// async function ExcluirTecnico(req, res) {
+async function ExcluirTecnico(req, res) {
 
-//     const id_tecnico = req.params.id_tecnico;
+    const id_tecnico = req.params.id_tecnico;
 
-//     const tecnico = await tecnicoService.ExcluiTecnico(id_tecnico);
+    const tecnico = await tecnicoService.ExcluirTecnico(id_tecnico);
 
-//     res.status(200).json(tecnico);
-// }
+    res.status(200).json(tecnico);
+}
 
-// async function ListarServicosTecnico(req, res) {
+async function ListarServicosTecnico(req, res) {
 
-//     const id_tecnico = req.params.id_tecnico;
-//     const serv_tecnico = await tecnicoService.ListarTecnicoServicos(id_tecnico);
+    const id_tecnico = req.params.id_tecnico;
+    const serv_tecnico = await tecnicoService.ListarTecnicoServicos(id_tecnico);
 
-//     res.status(200).json(serv_tecnico);
-// }
+    res.status(200).json(serv_tecnico);
+}
 
-export default { InserirTecnico, LoginTecnico, ListarTecnico, EditarTecnico }
+export default { InserirTecnico, LoginTecnico, ListarTecnico, EditarTecnico, ExcluirTecnico, ListarServicosTecnico }

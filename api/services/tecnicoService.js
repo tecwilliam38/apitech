@@ -39,18 +39,18 @@ async function LoginTecnico(email, password) {
             return [];
     }
 }
-// async function Excluir(id_tecnico) {
+async function ExcluirTecnico(id_tecnico) {
 
-//     const tecnicos = await repoTecnicos.Excluir(id_tecnico);
+    const tecnicos = await tecnicoRepo.ExcluirTecnico(id_tecnico);
 
-//     return tecnicos;
-// }
+    return tecnicos;
+}
 
-// async function ListarServicos(id_tecnico) {
+async function ListarTecnicoServicos(id_tecnico) {
 
-//     const serv_tecnico = await repoTecnicos.ListarServicos(id_tecnico);
+    const serv_tecnico = await tecnicoRepo.ListarTecnicoServicos(id_tecnico);
 
-//     return serv_tecnico;
-// }
+    return serv_tecnico;
+}
 
-export default {InserirTecnico, LoginTecnico, ListarTecnico, EditarTecnico}
+export default {InserirTecnico, LoginTecnico, ListarTecnico, EditarTecnico, ExcluirTecnico, ListarTecnicoServicos}
