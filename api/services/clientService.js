@@ -1,5 +1,5 @@
 import clientRepo from "../repositories/clientRepo.js";
-// import bcrypt from "bcrypt"
+
 import bcrypt from "bcryptjs"
 import jwt from "../token.js"
 
