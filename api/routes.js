@@ -4,7 +4,7 @@ import jwt from "./token.js"
 const router = Router();
 
 // New Routes
-// import clientController from "./controllers/clientController.js";
+import clientController from "./controllers/clientController.js";
 // import admminController from "./controllers/admminController.js";
 // import controllerAdmin from "./controllers/controllerAdmin.js";
 // import controllerTecnico from "./controllers/controllerTecnico.js";
