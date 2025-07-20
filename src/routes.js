@@ -1,10 +1,10 @@
 import { Router } from "express";
 import jwt from "./token.js"
-import clientController from "./controllers/clientController.js";
 
 const router = Router();
 
 // New Routes
+import clientController from "./controllers/clientController.js";
 // import controllerAdmin from "./controllers/controllerAdmin.js";
 // import controllerTecnico from "./controllers/controllerTecnico.js";
 // import controllerAppointment from "./controllers/controllerAppointment.js";
@@ -15,6 +15,7 @@ const router = Router();
 
 // Clientes...
 router.post("/client/register", clientController.InserirClient);
+router.get("/client/profile",jwt.ValidateToken, clientController.ProfileClient);
 // router.get("/client/listar", jwt.ValidateToken, controllerClient.Listar);
 // router.put("/client/:id_client", jwt.ValidateToken, controllerClient.Editar);
 // router.post('/client/buscar', jwt.ValidateToken, controllerClient.Buscar );

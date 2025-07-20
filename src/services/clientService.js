@@ -15,12 +15,12 @@ async function InserirClient(client_name, doc_id, endereco_rua, endereco_bairro,
     return client;
 }
 
-// async function Profile(id_client) {
+async function ProfileClient(id_client) {
 
-//     const client = await repoClient.Profile(id_client);
+    const client = await repoClient.ProfileClient(id_client);
 
-//     return client;
-// }
+    return client;
+}
 
 
 // async function Listar() {
@@ -53,4 +53,4 @@ async function InserirClient(client_name, doc_id, endereco_rua, endereco_bairro,
 //     }
 // }
 
-export default {InserirClient}
+export default {InserirClient, ProfileClient}

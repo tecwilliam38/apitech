@@ -41,24 +41,24 @@ async function InserirClient(
     }
 }
 
-// async function Profile(id_client) {
-//     let sql = `select id_client, name as tecnico, email, 
-//     phone_number as celular from powertech_client where id_client = $1`;
+async function ProfileClient(id_client) {
+    let sql = `select id_client, client_name as cliente, doc_id, endereco_rua, endereco_bairro,
+                endereco_cidade, endereco_uf, phone_contato as telefone, task, email, password, created_at, updated_at from apitech_client where id_client = $1`;
 
-//     const client = await pool.query(sql, [id_client]);
-//     return client.rows[0];
-// }
+    const client = await pool.query(sql, [id_client]);
+    return client.rows[0];
+}
 // async function Listar() {
 
 //     let sql = `select id_client, name, doc_id as inep, endereco_rua, endereco_bairro, 
-//     task as tarefa, endereco_cidade, phone_contato, email from powertech_client order by name`;
+//     task as tarefa, endereco_cidade, phone_contato, email from apitech_client order by name`;
 //     const clients = await pool.query(sql, []);
 //     return clients.rows;
 // }
 
 // async function Editar(id_client, name, email, phone_number) {
 
-//     let sql = `update powertech_client set name=$1, email=$2, phone_number=$3
+//     let sql = `update apitech_client set name=$1, email=$2, phone_number=$3
 // where id_client = $4`;
 
 //     await pool.query(sql, [name, email, phone_number, id_client]);
@@ -67,7 +67,7 @@ async function InserirClient(
 
 // async function Excluir(id_client) {
 
-//     let sql = `delete from powertech_client where id_client=$1`;
+//     let sql = `delete from apitech_client where id_client=$1`;
 
 //     await pool.query(sql, [id_client]);
 
@@ -78,7 +78,7 @@ async function InserirClient(
 //     try {
 //         const sql = `SELECT id_client, name, doc_id as inep, endereco_rua, endereco_bairro, 
 //     task as tarefa, endereco_cidade, phone_contato, email
-//                      FROM powertech_client
+//                      FROM apitech_client
 //                      WHERE name ILIKE $1 OR email ILIKE $1`;
 //         const resultado = await pool.query(sql, [`%${termo}%`]);
 //         return resultado.rows;
@@ -88,4 +88,4 @@ async function InserirClient(
 //     }
 // }
 
-export default {InserirClient}
+export default {InserirClient, ProfileClient}
