@@ -6,6 +6,7 @@ const router = Router();
 // New Routes
 import clientController from "./controllers/clientController.js";
 import admminController from "./controllers/admminController.js";
+import tecnicoController from "./controllers/tecnicoController.js";
 // import controllerTecnico from "./controllers/controllerTecnico.js";
 // import controllerAppointment from "./controllers/controllerAppointment.js";
 // import controllerClient from "./controllers/controllerClient.js";
@@ -18,7 +19,7 @@ router.post("/client/register", clientController.InserirClient);
 router.get("/client/profile",jwt.ValidateToken, clientController.ProfileClient);
 router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
 // router.put("/client/:id_client", jwt.ValidateToken, controllerClient.Editar);
-router.post('/client/buscar', jwt.ValidateToken, controllerClient.Buscar );
+router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient );
 
 // Rotas do Admin...
 router.post("/admin/register", admminController.InserirAdmin);
@@ -27,9 +28,9 @@ router.post("/admin/login", admminController.LoginAdmin);
 // router.get("/admin/appointments", jwt.ValidateToken, controllerAppointment.Listar);
 
 // Tecnicos...
-router.get("/tecnicos/listar", jwt.ValidateToken, controllerTecnico.Listar);
-router.post("/tecnicos/register", jwt.ValidateToken, controllerTecnico.Inserir);
-router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, controllerTecnico.ListarServicos);
+router.post("/tecnicos/register", jwt.ValidateToken, tecnicoController.InserirTecnico);
+// router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, controllerTecnico.ListarServicos);
+// router.get("/tecnicos/listar", jwt.ValidateToken, tecnicoController.Listar);
 
 // Appointments
 // router.post("/appointments/insert", jwt.ValidateToken, controllerAppointment.Inserir);
