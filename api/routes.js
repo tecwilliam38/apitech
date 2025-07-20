@@ -5,7 +5,7 @@ const router = Router();
 
 // New Routes
 import clientController from "./controllers/clientController.js";
-// import admminController from "./controllers/admminController.js";
+import admminController from "./controllers/admminController.js";
 // import controllerTecnico from "./controllers/controllerTecnico.js";
 // import controllerAppointment from "./controllers/controllerAppointment.js";
 // import controllerClient from "./controllers/controllerClient.js";

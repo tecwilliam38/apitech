@@ -29,19 +29,19 @@ async function LoginAdmin(email, password) {
             return [];
     }
 }
-async function ProfileAdmin(id_admin) {
+// async function ProfileAdmin(id_admin) {
 
-    const admin = await repoUser.ProfileAdmin(id_admin);
+//     const admin = await repoUser.ProfileAdmin(id_admin);
 
-    return admin;
-}
+//     return admin;
+// }
 
-async function ListarAdmin() {
+// async function ListarAdmin() {
 
-    const userAdmin = await adminRepo.ListarAdmin();
+//     const userAdmin = await adminRepo.ListarAdmin();
 
-    return userAdmin;
-}
+//     return userAdmin;
+// }
 
 // async function EditarAdmin(id_admin, name, email, phone_number) {
 
@@ -57,6 +57,6 @@ async function ListarAdmin() {
 //     return userAdmin;
 // }
 
-export default{InserirAdmin, LoginAdmin, ProfileAdmin, ListarAdmin, EditarAdmin, ExcluirAdmin};
+export default{InserirAdmin, LoginAdmin};
 
 
