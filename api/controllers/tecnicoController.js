@@ -1,38 +1,50 @@
+import tecnicoService from "../services/tecnicoService.js";
 
 
 async function InserirTecnico(req, res) {
     const { name, cel_phone, endereco, email, specialty, password } = req.body;
 
-    const tecnicos = await tecnicoServices.InserirTecnico(name, cel_phone,
+    const tecnicos = await tecnicoService.InserirTecnico(name, cel_phone,
         endereco, email, specialty, password);
 
     res.status(201).json(tecnicos);
 }
+async function LoginTecnico(req, res) {
 
+    const { email, password } = req.body;
 
-// async function ListarTecnico(req, res) {
+    const tecnico = await tecnicoService.LoginTecnico(email, password);
 
-//     const name = req.query.name;
-//     const tecnicos = await serviceTecnicos.Listar(name);
+    // if (user.length == 0)
+    if (!tecnico)
+        res.status(401).json({ error: "E-mail ou senha inválida" });
+    else
+        res.status(200).json(tecnico);
+}
 
-//     res.status(200).json(tecnicos);
-// }
+async function ListarTecnico(req, res) {
 
-// async function EditarTecnico(req, res) {
+    const name = req.query.name;
+    const tecnicos = await tecnicoService.ListarTecnico(name);
 
-//     const id_tecnico = req.params.id_tecnico;
-//     const { name, specialty, icon } = req.body;
+    res.status(200).json(tecnicos);
+}
 
-//     const tecnico = await serviceTecnicos.Editar(id_tecnico, name, specialty, icon);
+async function EditarTecnico(req, res) {
 
-//     res.status(200).json(tecnico);
-// }
+    const id_tecnico = req.params.id_tecnico;
+    const { name, specialty, icon } = req.body;
+
+    const tecnico = await tecnicoService.EditarTecnico(id_tecnico, name, specialty, icon);
+
+    res.status(200).json(tecnico);
+}
 
 // async function ExcluirTecnico(req, res) {
 
 //     const id_tecnico = req.params.id_tecnico;
 
-//     const tecnico = await serviceTecnicos.Excluir(id_tecnico);
+//     const tecnico = await tecnicoService.ExcluiTecnico(id_tecnico);
 
 //     res.status(200).json(tecnico);
 // }
@@ -40,9 +52,9 @@ async function InserirTecnico(req, res) {
 // async function ListarServicosTecnico(req, res) {
 
 //     const id_tecnico = req.params.id_tecnico;
-//     const serv_tecnico = await serviceTecnicos.ListarServicos(id_tecnico);
+//     const serv_tecnico = await tecnicoService.ListarTecnicoServicos(id_tecnico);
 
 //     res.status(200).json(serv_tecnico);
 // }
 
-export default { InserirTecnico }
+export default { InserirTecnico, LoginTecnico, ListarTecnico, EditarTecnico }
