@@ -29,7 +29,7 @@ router.post("/admin/login", admminController.LoginAdmin);
 
 // Tecnicos...
 router.post("/tecnicos/register", jwt.ValidateToken, tecnicoController.InserirTecnico);
-router.post("/tecnico/login", tecnicoController.LoginTecnico);
+router.post("/tecnicos/login", tecnicoController.LoginTecnico);
 router.get("/tecnicos/listar", jwt.ValidateToken, tecnicoController.ListarTecnico);
 // router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, controllerTecnico.ListarServicos);
 
