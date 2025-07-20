@@ -5,7 +5,7 @@ const router = Router();
 
 // New Routes
 import clientController from "./controllers/clientController.js";
-import admminController from "./controllers/admminController.js";
+// import admminController from "./controllers/admminController.js";
 // import controllerTecnico from "./controllers/controllerTecnico.js";
 // import controllerAppointment from "./controllers/controllerAppointment.js";
 // import controllerClient from "./controllers/controllerClient.js";
@@ -21,8 +21,8 @@ router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
 // router.post('/client/buscar', jwt.ValidateToken, controllerClient.Buscar );
 
 // Rotas do Admin...
-router.post("/admin/register", admminController.InserirAdmin);
-router.post("/admin/login", admminController.LoginAdmin);
+// router.post("/admin/register", admminController.InserirAdmin);
+// router.post("/admin/login", admminController.LoginAdmin);
 // router.get("/admin/listar", jwt.ValidateToken, controllerAdmin.ListarAdmin);
 // router.get("/admin/appointments", jwt.ValidateToken, controllerAppointment.Listar);
 
