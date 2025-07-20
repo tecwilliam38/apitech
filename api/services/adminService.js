@@ -1,7 +1,7 @@
 
-import bcrypt from "bcrypt";
 import jwt from "../token.js";
 import adminRepo from "../repositories/adminRepo.js";
+import bcrypt from "bcryptjs";
 
 async function InserirAdmin(name, email, phone_number, password) {
 
@@ -43,19 +43,19 @@ async function ListarAdmin() {
     return userAdmin;
 }
 
-async function EditarAdmin(id_admin, name, email, phone_number) {
+// async function EditarAdmin(id_admin, name, email, phone_number) {
 
-    const userAdmin = await adminRepo.EditarAdmin(id_admin, name, email, phone_number);
+//     const userAdmin = await adminRepo.EditarAdmin(id_admin, name, email, phone_number);
 
-    return userAdmin;
-}
+//     return userAdmin;
+// }
 
-async function ExcluirAdmin(id_admin) {
+// async function ExcluirAdmin(id_admin) {
 
-    const userAdmin = await adminRepo.ExcluirAdmin(id_admin);
+//     const userAdmin = await adminRepo.ExcluirAdmin(id_admin);
 
-    return userAdmin;
-}
+//     return userAdmin;
+// }
 
 export default{InserirAdmin, LoginAdmin, ProfileAdmin, ListarAdmin, EditarAdmin, ExcluirAdmin};
 
