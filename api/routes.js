@@ -16,8 +16,8 @@ import clientController from "./controllers/clientController.js";
 
 // Clientes...
 router.post("/client/register", clientController.InserirClient);
-// router.get("/client/profile",jwt.ValidateToken, clientController.ProfileClient);
-// router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
+router.get("/client/profile",jwt.ValidateToken, clientController.ProfileClient);
+router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
 // router.put("/client/:id_client", jwt.ValidateToken, controllerClient.Editar);
 // router.post('/client/buscar', jwt.ValidateToken, controllerClient.Buscar );
 

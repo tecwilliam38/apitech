@@ -9,19 +9,19 @@ async function InserirClient(req, res) {
         endereco_cidade, endereco_uf, phone_contato, task, email, password);
     res.status(201).json(client);
 }
-// async function ProfileClient(req, res) {
+async function ProfileClient(req, res) {
 
-//     const id_client = req.id_client;
-//     const client = await clientService.ProfileClient(id_client);
+    const id_client = req.id_client;
+    const client = await clientService.ProfileClient(id_client);
 
-//     res.status(200).json(client);
-// }
-// async function ListarClient(req, res) {
+    res.status(200).json(client);
+}
+async function ListarClient(req, res) {
 
-//     const client = await clientService.ListarClient();
+    const client = await clientService.ListarClient();
 
-//     res.status(200).json(client);
-// }
+    res.status(200).json(client);
+}
 // async function EditarClient(req, res) {
 
 //     const id_client = req.params.id_client;
@@ -54,5 +54,4 @@ async function InserirClient(req, res) {
 //     }
 // }
 
-// export default { InserirClient, ProfileClient, ListarClient }
-export default { InserirClient }
+export default { InserirClient, ProfileClient, ListarClient }

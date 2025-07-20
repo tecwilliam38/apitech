@@ -16,20 +16,20 @@ async function InserirClient(client_name, doc_id, endereco_rua, endereco_bairro,
     return client;
 }
 
-// async function ProfileClient(id_client) {
+async function ProfileClient(id_client) {
 
-//     const client = await clientRepo.ProfileClient(id_client);
+    const client = await clientRepo.ProfileClient(id_client);
 
-//     return client;
-// }
+    return client;
+}
 
 
-// async function ListarClient() {
+async function ListarClient() {
 
-//     const client = await clientRepo.ListarClient();
+    const client = await clientRepo.ListarClient();
 
-//     return client;
-// }
+    return client;
+}
 
 // async function Editar(id_client, name, email, phone_number) {
 
@@ -54,5 +54,4 @@ async function InserirClient(client_name, doc_id, endereco_rua, endereco_bairro,
 //     }
 // }
 
-// export default {InserirClient, ProfileClient, ListarClient}
-export default {InserirClient}
+export default {InserirClient, ProfileClient, ListarClient}
