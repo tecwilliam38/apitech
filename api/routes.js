@@ -21,8 +21,8 @@ router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
 // router.post('/client/buscar', jwt.ValidateToken, controllerClient.Buscar );
 
 // Rotas do Admin...
-// router.post("/admin/register", admminController.InserirAdmin);
-// router.post("/admin/login", admminController.LoginAdmin);
+router.post("/admin/register", admminController.InserirAdmin);
+router.post("/admin/login", admminController.LoginAdmin);
 // router.get("/admin/listar", jwt.ValidateToken, controllerAdmin.ListarAdmin);
 // router.get("/admin/appointments", jwt.ValidateToken, controllerAppointment.Listar);
 
