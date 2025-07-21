@@ -8,12 +8,6 @@ import clientController from "./controllers/clientController.js";
 import admminController from "./controllers/admminController.js";
 import tecnicoController from "./controllers/tecnicoController.js";
 import appointmentController from "./controllers/appointmentController.js";
-// import controllerTecnico from "./controllers/controllerTecnico.js";
-// import controllerAppointment from "./controllers/appointmentController.js";
-// import controllerClient from "./controllers/controllerClient.js";
-// import pool from "./database/pool.index.js";
-
-
 
 // Clientes...
 router.post("/client/register", clientController.InserirClient);
