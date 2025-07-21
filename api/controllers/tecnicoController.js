@@ -33,9 +33,9 @@ async function ListarTecnico(req, res) {
 async function EditarTecnico(req, res) {
 
     const id_tecnico = req.params.id_tecnico;
-    const { name, specialty, icon } = req.body;
+    const { name, email, endereco, password, cel_phone, } = req.body;
 
-    const tecnico = await tecnicoService.EditarTecnico(id_tecnico, name, specialty, icon);
+    const tecnico = await tecnicoService.EditarTecnico(id_tecnico, name, email, endereco, password, cel_phone,);
 
     res.status(200).json(tecnico);
 }
