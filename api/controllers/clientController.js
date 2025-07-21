@@ -26,10 +26,10 @@ async function EditarClient(req, res) {
 
     const id_client = req.params.id_client;
     const { client_name, doc_id, endereco_rua, endereco_bairro,
-    endereco_cidade, phone_contato, task, email, password} = req.body;
+    endereco_cidade, endereco_uf, phone_contato, task, email, password} = req.body;
 
-    const client = await clientService.Editar(id_client, client_name, doc_id, endereco_rua, endereco_bairro,
-    endereco_cidade, phone_contato, task, email, password);
+    const client = await clientService.EditarClient(id_client, client_name, doc_id, endereco_rua, endereco_bairro,
+    endereco_cidade, endereco_uf, phone_contato, task, email, password);
 
     res.status(200).json(client);
 }

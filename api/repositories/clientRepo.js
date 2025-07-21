@@ -21,7 +21,7 @@ async function InserirClient(
             console.log('Email já cadastrado.');
             return { erro: 'Email já cadastrado' };
 
-        }        
+        }
         const sqlInsert = `
             INSERT INTO apitech_client (client_name, doc_id, endereco_rua, endereco_bairro,
                 endereco_cidade, endereco_uf, phone_contato, task, email, password, created_at, updated_at)
@@ -56,36 +56,39 @@ async function ListarClient() {
     return clients.rows;
 }
 
-// async function Editar(id_client, name, email, phone_number) {
+async function EditarClient(id_client, client_name, doc_id, endereco_rua, endereco_bairro,
+    endereco_cidade, endereco_uf, phone_contato, task, email, password, updated_at) {
 
-//     let sql = `update apitech_client set name=$1, email=$2, phone_number=$3
-// where id_client = $4`;
+    let sql = `update apitech_client set client_name=$1, doc_id=$2, endereco_rua=$3, endereco_bairro=$4,
+    endereco_cidade=$5, endereco_uf=$6, phone_contato=$7, task=$8, email=$9, password=$10, updated_at= current_timestamp
+where id_client = $11`;
 
-//     await pool.query(sql, [name, email, phone_number, id_client]);
-//     return { id_client };
-// }
+    await pool.query(sql, [client_name, doc_id, endereco_rua, endereco_bairro,
+        endereco_cidade, endereco_uf, phone_contato, task, email, password, id_client]);
+    return { id_client };
+}
 
-// async function Excluir(id_client) {
+async function ExcluirClient(id_client) {
 
-//     let sql = `delete from apitech_client where id_client=$1`;
+    let sql = `delete from apitech_client where id_client=$1`;
 
-//     await pool.query(sql, [id_client]);
+    await pool.query(sql, [id_client]);
 
-//     return { id_client };
-// }
+    return { id_client };
+}
 
-// async function Buscar(termo) {
-//     try {
-//         const sql = `SELECT id_client, name, doc_id as inep, endereco_rua, endereco_bairro, 
-//     task as tarefa, endereco_cidade, phone_contato, email
-//                      FROM apitech_client
-//                      WHERE name ILIKE $1 OR email ILIKE $1`;
-//         const resultado = await pool.query(sql, [`%${termo}%`]);
-//         return resultado.rows;
-//     } catch (error) {
-//         console.error('Erro ao buscar clientes:', error);
-//         throw error;
-//     }
-// }
+async function BuscarClient(termo) {
+    try {
+        const sql = `SELECT id_client, name, doc_id as inep, endereco_rua, endereco_bairro, 
+    task as tarefa, endereco_cidade, phone_contato, email
+                     FROM apitech_client
+                     WHERE name ILIKE $1 OR email ILIKE $1`;
+        const resultado = await pool.query(sql, [`%${termo}%`]);
+        return resultado.rows;
+    } catch (error) {
+        console.error('Erro ao buscar clientes:', error);
+        throw error;
+    }
+}
 
-export default {InserirClient, ProfileClient, ListarClient}
+export default { InserirClient, ProfileClient, ListarClient, EditarClient }

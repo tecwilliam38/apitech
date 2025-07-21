@@ -62,10 +62,10 @@ async function ListarTecnico() {
 
 async function EditarTecnico(id_tecnico, name, email, endereco, password, cel_phone, updated_at) {
 
-    let sql = `update apitech_tecnicos set name=$1, email=$2, endereco=$3, password=$4, cel_phone=$5, current_timestamp
+    let sql = `update apitech_tecnicos set name=$1, email=$2, endereco=$3, password=$4, cel_phone=$5, updated_at=current_timestamp
 where id_tecnico = $6`;
 
-    await pool.query(sql, [name, email, endereco, password, cel_phone, updated_at, id_tecnico]);
+    await pool.query(sql, [name, email, endereco, password, cel_phone, id_tecnico]);
     return { id_tecnico };
 }
 

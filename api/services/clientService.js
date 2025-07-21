@@ -31,27 +31,29 @@ async function ListarClient() {
     return client;
 }
 
-// async function Editar(id_client, name, email, phone_number) {
+async function EditarClient(id_client, client_name, doc_id, endereco_rua, endereco_bairro,
+    endereco_cidade, endereco_uf, phone_contato, task, email, password) {
 
-//     const client = await clientRepo.Editar(id_client, name, email, phone_number);
+    const client = await clientRepo.EditarClient(id_client, client_name, doc_id, endereco_rua, endereco_bairro,
+    endereco_cidade, endereco_uf, phone_contato, task, email, password );
 
-//     return client;
-// }
+    return client;
+}
 
-// async function Excluir(id_client) {
+async function ExcluirClient(id_client) {
 
-//     const client = await clientRepo.Excluir(id_client);
+    const client = await clientRepo.ExcluirClient(id_client);
 
-//     return client;
-// }
-// async function Buscar(termo) {
-//     try {
-//         const resultado = await clientRepo.Buscar(termo);
-//         return resultado;
-//     } catch (err) {
-//         console.error(err);
-//         throw new Error('Erro ao buscar clientes');
-//     }
-// }
+    return client;
+}
+async function BuscarClient(termo) {
+    try {
+        const resultado = await clientRepo.BuscarClient(termo);
+        return resultado;
+    } catch (err) {
+        console.error(err);
+        throw new Error('Erro ao buscar clientes');
+    }
+}
 
-export default {InserirClient, ProfileClient, ListarClient}
+export default {InserirClient, ProfileClient, ListarClient, EditarClient, ExcluirClient}

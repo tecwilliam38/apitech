@@ -18,7 +18,7 @@ async function ListarTecnico(name) {
 
 async function EditarTecnico(id_tecnico, name, email, endereco, cel_phone, specialty) {
 
-    const tecnicos = await tecnicoRepo.EditarTecnico(id_tecnico, name, email, endereco, cel_phone, specialty, icon);
+    const tecnicos = await tecnicoRepo.EditarTecnico(id_tecnico, name, email, endereco, cel_phone, specialty);
 
     return tecnicos;
 }
