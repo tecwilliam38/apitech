@@ -29,6 +29,7 @@ router.get("/tecnicos/listar", jwt.ValidateToken, tecnicoController.ListarTecnic
 router.put("/tecnicos/:id_tecnico", jwt.ValidateToken, tecnicoController.EditarTecnico);
 router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, tecnicoController.ListarServicosTecnico);
 
+
 // Appointments
 router.post("/appointments/insert", jwt.ValidateToken, appointmentController.Inserir);
 router.get("/appointments/listar/tecnico/:id_tecnico", jwt.ValidateToken, appointmentController.ListarByUser);
