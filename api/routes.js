@@ -27,6 +27,7 @@ router.post("/tecnicos/register", jwt.ValidateToken, tecnicoController.InserirTe
 router.post("/tecnicos/login", tecnicoController.LoginTecnico);
 router.get("/tecnicos/listar", jwt.ValidateToken, tecnicoController.ListarTecnico);
 router.put("/tecnicos/:id_tecnico", jwt.ValidateToken, tecnicoController.EditarTecnico);
+router.delete("/tecnicos/:id_tecnico", jwt.ValidateToken, tecnicoController.ExcluirTecnico);
 router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, tecnicoController.ListarServicosTecnico);
 
 
