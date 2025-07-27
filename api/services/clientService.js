@@ -30,6 +30,12 @@ async function ListarClient() {
 
     return client;
 }
+async function ListarClientId(id_client) {
+
+    const client = await clientRepo.ListarClientId(id_client);
+
+    return client;
+}
 
 async function EditarClient(id_client, client_name, doc_id, endereco_rua, endereco_bairro,
     endereco_cidade, endereco_uf, phone_contato, task, email, password) {
@@ -56,4 +62,4 @@ async function BuscarClient(termo) {
     }
 }
 
-export default {InserirClient, ProfileClient, ListarClient, EditarClient, ExcluirClient}
+export default {InserirClient, ProfileClient, ListarClient, ListarClientId, EditarClient, ExcluirClient}

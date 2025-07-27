@@ -22,6 +22,14 @@ async function ListarClient(req, res) {
 
     res.status(200).json(client);
 }
+
+ async function ListarClientId(req, res) {
+ 
+     const id_client = req.params.id_client;
+     const client = await clientService.ListarClientId(id_client);
+ 
+     res.status(200).json(client);
+ }
 async function EditarClient(req, res) {
 
     const id_client = req.params.id_client;
@@ -54,4 +62,4 @@ async function BuscarClient(req, res) {
     }
 }
 
-export default { InserirClient, ProfileClient, ListarClient, BuscarClient, EditarClient, ExcluirClient }
+export default { InserirClient, ProfileClient, ListarClient, ListarClientId, BuscarClient, EditarClient, ExcluirClient }
