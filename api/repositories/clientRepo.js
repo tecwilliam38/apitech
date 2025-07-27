@@ -11,6 +11,7 @@ async function verificaEmailExistente(email) {
         throw error;
     }
 }
+
 async function InserirClient(
     client_name, doc_id, endereco_rua, endereco_bairro,
     endereco_cidade, endereco_uf, phone_contato, task, email, password, created_at, updated_at
@@ -20,7 +21,6 @@ async function InserirClient(
         if (emailJaExiste) {
             console.log('Email já cadastrado.');
             return { erro: 'Email já cadastrado' };
-
         }
         const sqlInsert = `
             INSERT INTO apitech_client (client_name, doc_id, endereco_rua, endereco_bairro,
@@ -54,6 +54,15 @@ async function ListarClient() {
     task as tarefa, endereco_cidade, endereco_uf, phone_contato, email from apitech_client order by client_name`;
     const clients = await pool.query(sql, []);
     return clients.rows;
+}
+async function ListarClientId(id_client) {
+
+    let sql = `select id_client, client_name, doc_id as inep, endereco_rua, endereco_bairro, 
+    task as tarefa, endereco_cidade, endereco_uf, phone_contato, email from apitech_client  
+    where id_client = $1`;
+
+    const client = await pool.query(sql, [id_client]);
+    return client.rows[0];
 }
 
 async function EditarClient(id_client, client_name, doc_id, endereco_rua, endereco_bairro,
@@ -91,4 +100,4 @@ async function BuscarClient(termo) {
     }
 }
 
-export default { InserirClient, ProfileClient, ListarClient, EditarClient }
+export default { InserirClient, ProfileClient, ListarClient, ListarClientId, ExcluirClient, BuscarClient, EditarClient }

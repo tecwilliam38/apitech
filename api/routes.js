@@ -13,6 +13,7 @@ import appointmentController from "./controllers/appointmentController.js";
 router.post("/client/register", clientController.InserirClient);
 router.get("/client/profile",jwt.ValidateToken, clientController.ProfileClient);
 router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
+router.get("/client/listar/:id_client", jwt.ValidateToken, clientController.ListarClient);
 router.put("/client/:id_client", jwt.ValidateToken, clientController.EditarClient);
 router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient );
 
