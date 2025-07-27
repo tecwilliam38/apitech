@@ -46,7 +46,7 @@ async function ExcluirClient(req, res) {
 
     const id_client = req.params.id_client;
 
-    const client = await clientService.Excluir(id_client);
+    const client = await clientService.ExcluirClient(id_client);
 
     res.status(200).json(client);
 }
