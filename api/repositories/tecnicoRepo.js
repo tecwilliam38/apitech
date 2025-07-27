@@ -31,6 +31,7 @@ async function InserirTecnico(name, cel_phone, endereco, email, specialty, passw
         throw error;
     }
 }
+
 async function ListarByEmail(email) {
     let sql = `select * from apitech_tecnicos where email = $1`;
     try {
@@ -58,6 +59,15 @@ async function ListarTecnico() {
 
     const tecnicos = await pool.query(sql, []);
     return tecnicos.rows;
+}
+async function ListarTecnicoId(id_tecnico) {
+
+    let sql = `select id_tecnico, name, email, endereco, 
+    cel_phone, specialty as skill from apitech_tecnicos 
+    where id_tecnico = $1`;
+
+    const tecnicos = await pool.query(sql, [id_tecnico]);
+    return tecnicos.rows[0];
 }
 
 async function EditarTecnico(id_tecnico, name, email, endereco, password, cel_phone, updated_at) {
@@ -89,5 +99,5 @@ async function ListarTecnicoServicos(id_tecnico) {
     return serv_tecnico.rows;
 }
 
-export default { InserirTecnico, ListarByEmail, ListarTecnico, EditarTecnico, ListarTecnicoServicos, ExcluirTecnico }
+export default { InserirTecnico, ListarByEmail, ListarTecnico, ListarTecnicoId, EditarTecnico, ListarTecnicoServicos, ExcluirTecnico }
 

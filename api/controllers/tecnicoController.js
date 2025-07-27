@@ -29,6 +29,13 @@ async function ListarTecnico(req, res) {
 
     res.status(200).json(tecnicos);
 }
+async function ListarTecnicoId(req, res) {
+
+    const id_tecnico = req.params.id_tecnico;
+    const tecnicos = await tecnicoService.ListarTecnicoId(id_tecnico);
+
+    res.status(200).json(tecnicos);
+}
 
 async function EditarTecnico(req, res) {
 
@@ -57,4 +64,4 @@ async function ListarServicosTecnico(req, res) {
     res.status(200).json(serv_tecnico);
 }
 
-export default { InserirTecnico, LoginTecnico, ListarTecnico, EditarTecnico, ExcluirTecnico, ListarServicosTecnico }
+export default { InserirTecnico, LoginTecnico, ListarTecnico, ListarTecnicoId, EditarTecnico, ExcluirTecnico, ListarServicosTecnico }

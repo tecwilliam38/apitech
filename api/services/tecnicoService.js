@@ -15,6 +15,12 @@ async function ListarTecnico(name) {
 
     return tecnicos;
 }
+async function ListarTecnicoId(id_tecnico) {
+
+    const tecnicos = await tecnicoRepo.ListarTecnicoId(id_tecnico);
+
+    return tecnicos;
+}
 
 async function EditarTecnico(id_tecnico, name, email, endereco, cel_phone, specialty) {
 
@@ -53,4 +59,5 @@ async function ListarTecnicoServicos(id_tecnico) {
     return serv_tecnico;
 }
 
-export default {InserirTecnico, LoginTecnico, ListarTecnico, EditarTecnico, ExcluirTecnico, ListarTecnicoServicos}
+
+export default {InserirTecnico, LoginTecnico, ListarTecnico, ListarTecnicoId, EditarTecnico, ExcluirTecnico, ListarTecnicoServicos}
