@@ -92,7 +92,12 @@ async function BuscarClient(termo) {
     task as tarefa, endereco_cidade, phone_contato, email
                      FROM apitech_client
                      WHERE client_name ILIKE $1 
-                     OR email ILIKE $1`;
+                     OR email ILIKE $1 
+                     OR endereco_rua ILIKE $1 
+                     OR endereco_bairro ILIKE $1 
+                     OR endereco_cidade ILIKE $1 
+                     OR phone_contato ILIKE $1
+`;
         const resultado = await pool.query(sql, [`%${termo}%`]);
         return resultado.rows;
     } catch (error) {
