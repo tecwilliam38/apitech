@@ -16,7 +16,7 @@ router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
 router.get("/client/listar/:id_client", jwt.ValidateToken, clientController.ListarClientId);
 router.put("/client/:id_client", jwt.ValidateToken, clientController.EditarClient);
 router.delete("/client/delete/:id_client", jwt.ValidateToken, clientController.ExcluirClient);
-router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient );
+router.get('/client/buscar', jwt.ValidateToken, clientController.BuscarClient );
 
 // Rotas do Admin...
 router.post("/admin/register", admminController.InserirAdmin);

@@ -88,10 +88,10 @@ async function ExcluirClient(id_client) {
 
 async function BuscarClient(termo) {
     try {
-        const sql = `SELECT id_client, name, doc_id as inep, endereco_rua, endereco_bairro, 
+        const sql = `SELECT id_client, client_name, doc_id as inep, endereco_rua, endereco_bairro, 
     task as tarefa, endereco_cidade, phone_contato, email
                      FROM apitech_client
-                     WHERE name ILIKE $1 
+                     WHERE client_name ILIKE $1 
                      OR email ILIKE $1 
                      OR endereco_rua ILIKE $1 
                      OR endereco_bairro ILIKE $1 
