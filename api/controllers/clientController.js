@@ -52,7 +52,7 @@ async function ExcluirClient(req, res) {
 }
 async function BuscarClient(req, res) {
 
-    const { termo } = req.query.termo; 
+    const { termo } = req.body; 
     try {
         const resultado = await clientService.BuscarClient(termo);
         res.status(200).json(resultado);
