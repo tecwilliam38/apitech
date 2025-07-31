@@ -54,7 +54,7 @@ async function BuscarClient(req, res) {
 
     const { termo } = req.body; 
     try {
-        const resultado = await clientService.Buscar(termo);
+        const resultado = await clientService.BuscarClient(termo);
         res.status(200).json(resultado);
     } catch (err) {
         console.error(err);

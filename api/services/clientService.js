@@ -62,4 +62,4 @@ async function BuscarClient(termo) {
     }
 }
 
-export default {InserirClient, ProfileClient, ListarClient, ListarClientId, EditarClient, ExcluirClient}
+export default {InserirClient, ProfileClient, ListarClient, ListarClientId, EditarClient, ExcluirClient, BuscarClient}

@@ -12,11 +12,10 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
    from apitech_appointments pa
    join apitech_services ps on (ps.id_service = pa.id_service)
    join apitech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
-   left join apitech_client pc on (pc.id_client = pa.id_client)
-   join apitech_tecnicos_services pts
-   on pts.id_tecnico = pa.id_tecnico and pts.id_service = pa.id_service
+   left  join apitech_client pc on (pc.id_client = pa.id_client)
+   join apitech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
+                          pts.id_service = pa.id_service)
    where pa.id_appointment > 0 `;
-
 
     if (id_client) {
         filtro.push(id_client);
