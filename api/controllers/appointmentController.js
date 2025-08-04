@@ -1,7 +1,7 @@
 import appointmentService from "../services/appointmentService.js";
 
 
-async function ListarByUser(req, res) {
+async function ListarTecnico(req, res) {
 
     const id_tecnico = req.id_tecnico;
     const appointments = await appointmentService.ListarAll(id_tecnico);
@@ -74,6 +74,6 @@ async function EditarAdmin(req, res) {
 }
 
 export default {
-    ListarAll, ListarByUser, Inserir, Excluir, ListarId,
+    ListarAll, ListarTecnico, Inserir, Excluir, ListarId,
     InserirAdmin, EditarAdmin
 };

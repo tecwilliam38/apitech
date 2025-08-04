@@ -36,7 +36,7 @@ router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, tecnicoControlle
 
 // Appointments
 router.post("/appointments/insert", jwt.ValidateToken, appointmentController.Inserir);
-router.get("/appointments/listar/tecnico/:id_tecnico", jwt.ValidateToken, appointmentController.ListarByUser);
+router.get("/appointments/listar/tecnico", jwt.ValidateToken, appointmentController.ListarTecnico);
 router.get("/appointments/listar", jwt.ValidateToken, appointmentController.ListarAll);
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmentController.ListarId);
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.EditarAdmin);
