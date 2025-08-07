@@ -1,7 +1,7 @@
 import appointmentRepo from "../repositories/appointmentRepo.js";
 
 
-async function ListarAll(id_client, dt_start, dt_end, id_tecnico) {
+async function ListarAll(id_tecnico, dt_start, dt_end,  id_client) {
 
     const appointments = await appointmentRepo.ListarAll(id_client, dt_start, dt_end, id_tecnico);
 

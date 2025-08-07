@@ -2,9 +2,9 @@ import pool from "../database/db.js";
 
 
 
-async function ListarTecnico(id_tecnico) {
+async function ListarTecnico(id_tecnico, dt_start, dt_end,  id_client) {
 
-    // let filtro = [];
+    let filtro = [];
 
     let sql = `select pa.id_appointment, ps.description as service, 
     pt.name as tecnico, pt.specialty, pa.id_tecnico,
@@ -16,20 +16,34 @@ async function ListarTecnico(id_tecnico) {
    join apitech_client pc on (pc.id_client = pa.id_client)
    join apitech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
                           pts.id_service = pa.id_service)
- WHERE pa.id_appointment > 0
-  AND pa.id_tecnico = $1;`
+   WHERE pa.id_appointment > 0 ;`
+ 
+    if (id_client) {
+         filtro.push(id_client);
+         sql += " AND pa.id_client = $" + filtro.length;
+     }
+   if (dt_start) {
+         filtro.push(dt_start);
+         sql += " AND a.booking_date >= $" + filtro.length;
+     }
+ 
+     if (dt_end) {
+         filtro.push(dt_end);
+         sql += " AND a.booking_date <= $" + filtro.length;
+     }
+ 
 
+    if (id_tecnico) {
+        filtro.push(id_tecnico);
+        sql += " AND pa.id_tecnico = $"+ filtro.length;
+    }    
 
-   
-   const appointments = await pool.query(sql,[id_tecnico]);
-   
-   return appointments.rows;
-   }
-   // if (id_tecnico) {
-   //     filtro.push(id_tecnico);
-   //     sql += " AND pa.id_tecnico = $" + filtro.length;
-   // }
-   // sql += " order by pa.id_tecnico";
+    const appointments = await pool.query(sql, filtro);
+    console.log(appointments.rows);
+    
+    return appointments.rows;
+}
+
 async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
 
     let filtro = [];
