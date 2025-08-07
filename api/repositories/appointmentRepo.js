@@ -2,7 +2,7 @@ import pool from "../database/db.js";
 
 
 
-async function ListarTecnico(id_client, dt_start, dt_end, id_tecnico) {
+async function ListarTecnico( id_tecnico) {
 
     let filtro = [];
 
@@ -17,16 +17,6 @@ async function ListarTecnico(id_client, dt_start, dt_end, id_tecnico) {
    join apitech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
                           pts.id_service = pa.id_service)
    where pa.id_appointment > 0`;
-
-   if (dt_start) {
-        filtro.push(dt_start);
-        sql += " AND pa.booking_date >= $" + filtro.length;
-    }
-
-    if (dt_end) {
-        filtro.push(dt_end);
-        sql += " AND pa.booking_date <= $" + filtro.length;
-    }
 
     if (id_tecnico) {
         filtro.push(id_tecnico);

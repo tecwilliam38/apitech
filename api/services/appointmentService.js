@@ -7,9 +7,9 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico) {
 
     return appointments;
 }
-async function ListarTecnico(id_client, dt_start, dt_end, id_tecnico) {
+async function ListarTecnico(id_tecnico) {
 
-    const appointments = await appointmentRepo.ListarTecnico(id_client, dt_start, dt_end, id_tecnico);
+    const appointments = await appointmentRepo.ListarTecnico(id_tecnico);
 
     return appointments;
 }
