@@ -2,7 +2,7 @@ import pool from "../database/db.js";
 
 
 
-async function ListarTecnico(id_client, dt_start, dt_end, id_tecnico, status) {
+async function ListarTecnico(id_client, dt_start, dt_end, id_tecnico) {
 
     let filtro = [];
 
@@ -161,4 +161,4 @@ async function ListarServicos(id_tecnico) {
         console.log(err);
     }
 }
-export default { ListarAll, Inserir, Excluir, Editar, ListarServicos, ListarId };
+export default { ListarAll, Inserir, Excluir, Editar, ListarServicos, ListarId, ListarTecnico };

@@ -4,7 +4,7 @@ import appointmentService from "../services/appointmentService.js";
 async function ListarTecnico(req, res) {
 
     const id_tecnico = req.id_tecnico;
-    const appointments = await appointmentService.ListarAll(id_tecnico, 0, 0, 0);
+    const appointments = await appointmentService.ListarTecnico(id_tecnico, 0, 0, 0);
 
     res.status(200).json(appointments);
 }

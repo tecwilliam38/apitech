@@ -7,6 +7,12 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico) {
 
     return appointments;
 }
+async function ListarTecnico(id_client, dt_start, dt_end, id_tecnico) {
+
+    const appointments = await appointmentRepo.ListarTecnico(id_client, dt_start, dt_end, id_tecnico);
+
+    return appointments;
+}
 
 async function ListarId(id_appointment) {
 
@@ -37,4 +43,4 @@ async function Editar(id_appointment, id_client,
     return appointment;
 }
 
-export default { ListarAll, Inserir, Excluir, ListarId, Editar }
+export default { ListarAll, Inserir, Excluir, ListarId, Editar, ListarTecnico }
