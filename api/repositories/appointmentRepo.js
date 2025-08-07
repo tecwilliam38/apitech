@@ -6,16 +6,16 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
     let filtro = [];
 
     let sql = `select pa.id_appointment, ps.description as service, 
-    pt.name as tecnico, pt.specialty,
+    pt.name as tecnico, pt.specialty, pa.id_tecnico,
    pa.booking_date, pa.booking_hour, pts.price as preco, pc.client_name as cliente,
    pa.id_service, pa.status, pa.id_client
    from apitech_appointments pa
    join apitech_services ps on (ps.id_service = pa.id_service)
    join apitech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
-   left  join apitech_client pc on (pc.id_client = pa.id_client)
+   join apitech_client pc on (pc.id_client = pa.id_client)
    join apitech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
                           pts.id_service = pa.id_service)
-   where pa.id_appointment > 0 `;
+   where pa.id_appointment > 0`;
 
     if (id_client) {
         filtro.push(id_client);
