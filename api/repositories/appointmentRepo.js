@@ -16,13 +16,13 @@ async function ListarTecnico(id_tecnico) {
    join apitech_client pc on (pc.id_client = pa.id_client)
    join apitech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
                           pts.id_service = pa.id_service)
-   WHERE pa.id_appointment > 0 ;` 
+   WHERE pa.id_appointment > 0 ;`
 
     if (id_tecnico) {
         filtro.push(id_tecnico);
-        sql += " AND pa.id_tecnico = $"+ filtro.length;
-    }    
-
+        sql += " AND pa.id_tecnico = $" + filtro.length;
+    }
+    sql += " order by pa.booking_date, pa.booking_hour";
     const appointments = await pool.query(sql, filtro);
     return appointments.rows;
 }
