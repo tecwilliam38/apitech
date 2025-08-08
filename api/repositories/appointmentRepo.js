@@ -22,7 +22,7 @@ async function ListarTecnico(id_tecnico) {
         filtro.push(id_tecnico);
         sql += " AND pa.id_tecnico = $" + filtro.length;
     }
-    sql += " order by pa.booking_date, pa.booking_hour";
+    // sql += " order by pa.booking_date, pa.booking_hour";
     const appointments = await pool.query(sql, filtro);
     return appointments.rows;
 }
