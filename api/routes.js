@@ -9,7 +9,7 @@ import admminController from "./controllers/admminController.js";
 import tecnicoController from "./controllers/tecnicoController.js";
 import appointmentController from "./controllers/appointmentController.js";
 
-// Clientes...
+// Clientes status...
 router.post("/client/register", clientController.InserirClient);
 router.get("/client/profile",jwt.ValidateToken, clientController.ProfileClient);
 router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
