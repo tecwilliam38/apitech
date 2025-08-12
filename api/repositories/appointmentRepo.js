@@ -35,8 +35,17 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
 
     sql += " ORDER BY a.id_tecnico";
 
-    const appointments = await pool.query(sql, filtro);
-    return appointments.rows;
+
+    try {
+        console.log('Query final:', sql);
+        console.log('Valores:', filtro);
+
+        const resultado = await pool.query(sql, filtro);
+        return resultado.rows;
+    } catch (erro) {
+        console.error('Erro ao buscar agendamentos:', erro);
+        throw erro;
+    }
 }
 
 async function Listarold(id_client, dt_start, dt_end, id_tecnico, status) {
