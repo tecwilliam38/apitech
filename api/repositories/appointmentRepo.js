@@ -13,9 +13,13 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
          JOIN apitech_services s ON (s.id_service = a.id_service)
          JOIN apitech_tecnicos b ON (b.id_tecnico = a.id_tecnico)
          JOIN apitech_client pc ON (pc.id_client = a.id_client)
-         left  JOIN apitech_tecnicos_services bs ON (bs.id_tecnico = a.id_tecnico AND bs.id_service = a.id_service)
+         JOIN apitech_tecnicos_services bs ON (bs.id_tecnico = a.id_tecnico AND bs.id_service = a.id_service)
          WHERE a.id_appointment > 0`;
 
+    if(id_client){
+        filtro.push(id_client);
+        sql += ` AND a.id_client = $${filtro.length}`;
+    }
     if (id_tecnico) {
         filtro.push(id_tecnico);
         sql += ` AND a.id_tecnico = $${filtro.length}`;
@@ -37,7 +41,6 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
 
 
     try {
-        console.log('Query final:', sql);
         console.log('Valores:', filtro);
 
         const resultado = await pool.query(sql, filtro);

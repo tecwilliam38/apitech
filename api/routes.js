@@ -8,15 +8,16 @@ import clientController from "./controllers/clientController.js";
 import admminController from "./controllers/admminController.js";
 import tecnicoController from "./controllers/tecnicoController.js";
 import appointmentController from "./controllers/appointmentController.js";
+import pool from "./database/db.js";
 
 // Clientes status...
 router.post("/client/register", clientController.InserirClient);
-router.get("/client/profile",jwt.ValidateToken, clientController.ProfileClient);
+router.get("/client/profile", jwt.ValidateToken, clientController.ProfileClient);
 router.get("/client/listar", jwt.ValidateToken, clientController.ListarClient);
 router.get("/client/listar/:id_client", jwt.ValidateToken, clientController.ListarClientId);
 router.put("/client/:id_client", jwt.ValidateToken, clientController.EditarClient);
 router.delete("/client/delete/:id_client", jwt.ValidateToken, clientController.ExcluirClient);
-router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient );
+router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient);
 
 // Rotas do Admin...
 router.post("/admin/register", admminController.InserirAdmin);
@@ -42,5 +43,36 @@ router.get("/appointments/listar", jwt.ValidateToken, appointmentController.List
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmentController.ListarId);
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.EditarAdmin);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, appointmentController.Excluir);
+
+// Alternativa
+router.get('/api/listar/:id_tecnico', async (req, res) => {
+  const { id_tecnico } = req.params;
+
+  try {
+    const result = await pool.query(
+      `SELECT a.id_appointment,a.id_tecnico, s.description AS service,          
+                b.name AS tecnico, b.specialty,
+                a.booking_date, a.booking_hour, pc.client_name AS cliente, bs.price as preco, 
+                a.id_service, a.id_client
+         FROM apitech_appointments a
+         JOIN apitech_services s ON (s.id_service = a.id_service)
+         JOIN apitech_tecnicos b ON (b.id_tecnico = a.id_tecnico)
+         JOIN apitech_client pc ON (pc.id_client = a.id_client)
+         JOIN apitech_tecnicos_services bs ON (bs.id_tecnico = a.id_tecnico AND bs.id_service = a.id_service)
+         WHERE a.id_appointment > 0
+         AND a.id_tecnico = $1`,
+
+      [id_tecnico]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Erro ao buscar técnico');
+  }
+});
+
+
+
 
 export default router;
