@@ -9,9 +9,9 @@ async function ListarTecnico(req, res) {
 }
 
 async function ListarAll(req, res) {
-    const id_tecnico = req.params.id_tecnico;
-    const dt_start = req.query.dt_start;
-    const dt_end = req.query.dt_end;
+    const id_tecnico = req.body.id_tecnico;
+    const dt_start = req.body.dt_start;
+    const dt_end = req.body.dt_end;
 
     const appointments = await appointmentService.ListarAll(0, dt_start, dt_end, id_tecnico);
 
