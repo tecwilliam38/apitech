@@ -9,7 +9,7 @@ async function ListarTecnico(req, res) {
 }
 
 async function ListarAll(req, res) {
-    const {id_tecnico, dt_start, dt_end} = req.body;
+    const {id_tecnico, dt_start, dt_end} = req.params;
 
     const appointments = await appointmentService.ListarAll(0, dt_start, dt_end, id_tecnico);
 
