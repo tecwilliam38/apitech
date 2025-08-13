@@ -38,7 +38,7 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
 
     if (id_tecnico) {
         filtro.push(id_tecnico);
-        sql += ` AND pa.id_tecnico = \$${filtro.length}`;
+        sql += ` AND pa.id_tecnico = $${filtro.length}`;
     }
 
 
