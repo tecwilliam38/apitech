@@ -148,4 +148,4 @@ async function ListarServicos(id_tecnico) {
         console.log(err);
     }
 }
-export default { ListarAll, Inserir, Excluir, Editar, ListarServicos, ListarId, ListarTecnico, Listar };
+export default { ListarAll, Inserir, Excluir, Editar, ListarServicos, ListarId, ListarTecnico };
