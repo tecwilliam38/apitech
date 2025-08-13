@@ -56,7 +56,7 @@ async function ProfileTecnico(id_tecnico) {
 }
 async function ListarTecnico() {
 
-    let sql = `select id_tecnico, name, email, endereco, password,
+    let sql = `select id_tecnico, name, email, endereco, 
     cel_phone, specialty as skill from apitech_tecnicos order by name`;
 
     const tecnicos = await pool.query(sql, []);
@@ -64,7 +64,7 @@ async function ListarTecnico() {
 }
 async function ListarTecnicoId(id_tecnico) {
 
-    let sql = `select id_tecnico, name, email, endereco, 
+    let sql = `select id_tecnico, name, email, endereco, password,
     cel_phone, specialty as skill from apitech_tecnicos 
     where id_tecnico = $1`;
 
