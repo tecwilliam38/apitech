@@ -9,13 +9,8 @@ async function ListarTecnico(req, res) {
 }
 
 async function ListarAll(req, res) {
-    
-    const { dt_start, dt_end, id_tecnico } = req.body;
-    // const { dt_start, dt_end, id_tecnico } = req.query;
-
-    // console.log('Parâmetros recebidos:', { dt_start, dt_end, id_tecnico });
-
-    const appointments = await appointmentService.ListarAll(0, dt_start, dt_end, id_tecnico);
+    const {id_client, dt_start, dt_end, id_tecnico } = req.body;
+    const appointments = await appointmentService.ListarAll(null, dt_start, dt_end, id_tecnico);
 
     res.status(200).json(appointments);
 }
