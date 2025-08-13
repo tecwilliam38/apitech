@@ -36,7 +36,7 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
         sql += ` AND pa.booking_date <= $${filtro.length}`;
     }
 
-    if (id_tecnico !== null) {
+    if (id_tecnico) {
         filtro.push(id_tecnico);
         sql += ` AND pa.id_tecnico = \$${filtro.length}`;
     }
