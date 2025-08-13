@@ -22,9 +22,9 @@ async function ListarTecnicoId(id_tecnico) {
     return tecnicos;
 }
 
-async function EditarTecnico(id_tecnico, name, email, endereco, cel_phone, specialty) {
+async function EditarTecnico(id_tecnico, name, email, endereco, password, cel_phone, specialty) {
 
-    const tecnicos = await tecnicoRepo.EditarTecnico(id_tecnico, name, email, endereco, cel_phone, specialty);
+    const tecnicos = await tecnicoRepo.EditarTecnico(id_tecnico, name, email, endereco, password, cel_phone, specialty);
 
     return tecnicos;
 }
@@ -65,11 +65,12 @@ async function TecnicoSkill(id_tecnico, id_service, price) {
 }
 
 export default {
-    InserirTecnico, 
-    LoginTecnico, 
-    ListarTecnico, 
-    ListarTecnicoId, 
-    EditarTecnico, 
-    ExcluirTecnico, 
-    ListarTecnicoServicos, 
-    TecnicoSkill}
+    InserirTecnico,
+    LoginTecnico,
+    ListarTecnico,
+    ListarTecnicoId,
+    EditarTecnico,
+    ExcluirTecnico,
+    ListarTecnicoServicos,
+    TecnicoSkill
+}
