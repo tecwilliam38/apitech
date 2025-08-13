@@ -23,11 +23,12 @@ async function ListarTecnicoId(id_tecnico) {
 }
 
 async function EditarTecnico(id_tecnico, name, email, endereco, password, cel_phone, specialty) {
-
-    const tecnicos = await tecnicoRepo.EditarTecnico(id_tecnico, name, email, endereco, password, cel_phone, specialty);
+    const hashPassword = await bcrypt.hash(password, 10);
+    const tecnicos = await tecnicoRepo.EditarTecnico(id_tecnico, name, email, endereco, hashPassword, cel_phone, specialty);
 
     return tecnicos;
 }
+
 async function LoginTecnico(email, password) {
 
     const tecnico = await tecnicoRepo.ListarByEmail(email);
