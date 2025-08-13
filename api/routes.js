@@ -44,35 +44,4 @@ router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmen
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.EditarAdmin);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, appointmentController.Excluir);
 
-// Alternativa
-router.get('/api/listar/:id_tecnico', async (req, res) => {
-  const { id_tecnico } = req.params;
-
-  try {
-    const result = await pool.query(
-      `SELECT a.id_appointment,a.id_tecnico, s.description AS service,          
-                b.name AS tecnico, b.specialty,
-                a.booking_date, a.booking_hour, pc.client_name AS cliente, bs.price as preco, 
-                a.id_service, a.id_client
-         FROM apitech_appointments a
-         JOIN apitech_services s ON (s.id_service = a.id_service)
-         JOIN apitech_tecnicos b ON (b.id_tecnico = a.id_tecnico)
-         JOIN apitech_client pc ON (pc.id_client = a.id_client)
-         JOIN apitech_tecnicos_services bs ON (bs.id_tecnico = a.id_tecnico AND bs.id_service = a.id_service)
-         WHERE a.id_appointment > 0
-         AND a.id_tecnico = $1`,
-
-      [id_tecnico]
-    );
-
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Erro ao buscar técnico');
-  }
-});
-
-
-
-
 export default router;
