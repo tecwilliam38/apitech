@@ -6,6 +6,7 @@ import pool from "../database/db.js";
 
 async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
     let filtro = [];
+    let index = 1;
 
     let sql = `SELECT pa.id_appointment, pa.id_tecnico, ps.description AS service, 
     pt.name AS tecnico, pt.specialty, pa.booking_date, pa.booking_hour, 
@@ -21,24 +22,23 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
 
     if (id_client) {
         filtro.push(id_client);
-        sql += ` AND pa.id_client = $${filtro.length}`;
-    } else {
-        //  
+        // sql += ` AND pa.id_client = $${filtro.length}`;
+        sql += ` AND pa.id_client = $${index++}`;
     }
 
     if (dt_start) {
         filtro.push(dt_start);
-        sql += ` AND pa.booking_date >= $${filtro.length}`;
+        sql += ` AND pa.booking_date >= $${index++}`;
     }
 
     if (dt_end) {
         filtro.push(dt_end);
-        sql += ` AND pa.booking_date <= $${filtro.length}`;
+        sql += ` AND pa.booking_date <= $${index++}`;
     }
 
     if (id_tecnico) {
         filtro.push(id_tecnico);
-        sql += ` AND pa.id_tecnico = $${filtro.length}`;
+        sql += ` AND pa.id_tecnico = $${index++}`;
     }
 
 
