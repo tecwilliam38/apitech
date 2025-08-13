@@ -1,12 +1,14 @@
 import appointmentRepo from "../repositories/appointmentRepo.js";
 
 
-async function ListarAll(id_tecnico, dt_start, dt_end) {
+async function ListarAll(id_client, dt_start, dt_end, id_tecnico) {
+    console.log('ListarAll recebeu:', { id_client, id_tecnico, dt_start, dt_end });
 
-    const appointments = await appointmentRepo.Listar(0, id_tecnico, dt_start, dt_end);
+    const appointments = await appointmentRepo.Listar(id_client, dt_start, dt_end, id_tecnico);
 
     return appointments;
 }
+
 async function ListarTecnico(id_tecnico) {
 
     const appointments = await appointmentRepo.ListarTecnico(id_tecnico);

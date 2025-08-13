@@ -16,15 +16,10 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
          JOIN apitech_tecnicos_services bs ON (bs.id_tecnico = a.id_tecnico AND bs.id_service = a.id_service)
          WHERE a.id_appointment > 0`;
 
-    if(id_client){
+    if (id_client) {
         filtro.push(id_client);
         sql += ` AND a.id_client = $${filtro.length}`;
     }
-    if (id_tecnico) {
-        filtro.push(id_tecnico);
-        sql += ` AND a.id_tecnico = $${filtro.length}`;
-    }
-
 
     if (dt_start) {
         filtro.push(dt_start);
@@ -35,7 +30,10 @@ async function Listar(id_client, dt_start, dt_end, id_tecnico) {
         filtro.push(dt_end);
         sql += " AND a.booking_date <= $" + filtro.length;
     }
-
+    if (id_tecnico) {
+        filtro.push(id_tecnico);
+        sql += ` AND a.id_tecnico = $${filtro.length}`;
+    }
 
     sql += " ORDER BY a.id_tecnico";
 
