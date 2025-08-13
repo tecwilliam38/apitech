@@ -46,6 +46,7 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
 
     try {
         const resultado = await pool.query(sql, filtro);
+        // res.status(200).json(resultado.rows);
         return resultado.rows;
     } catch (erro) {
         console.error('Erro ao buscar agendamentos:', erro);
