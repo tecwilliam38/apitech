@@ -45,8 +45,9 @@ router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmen
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.EditarAdmin);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, appointmentController.Excluir);
 
+
 // POST com body
-router.post('/tecnicos/listar/agenda', jwt.ValidateToken, async (req, res) => {
+router.post('/tecnicos/listar', jwt.ValidateToken, async (req, res) => {
     const { id_client, dt_start, dt_end, id_tecnico } = req.body;
     let filtro = [];
 
