@@ -94,7 +94,7 @@ router.get('/tecnicos/listar', async (req, res) => {
 });
 
 // POST com body
-router.post('/tecnicos/listar', async (req, res) => {
+router.post('/tecnicos/listar', jwt.ValidateToken, async (req, res) => {
     const { id_client, dt_start, dt_end, id_tecnico } = req.body;
     let filtro = [];
 
