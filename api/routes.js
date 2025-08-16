@@ -39,6 +39,7 @@ router.post("/tecnicos/skills/:id_tecnico", jwt.ValidateToken, tecnicoController
 // Appointments
 router.post("/appointments/insert", jwt.ValidateToken, appointmentController.Inserir);
 router.post("/appointments/listar", jwt.ValidateToken, appointmentController.ListarAgenda);
+router.post('/agenda/listar', jwt.ValidateToken,appointmentController.ListarAgenda);
 router.get("/appointments/listar", jwt.ValidateToken, appointmentController.ListarAll);
 // router.post("/agenda/listar", jwt.ValidateToken, appointmentController.ListarAll);
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmentController.ListarId);
@@ -47,7 +48,6 @@ router.delete("/appointments/:id_appointment", jwt.ValidateToken, appointmentCon
 
 
 // POST com body
-router.post('/agenda/listar', jwt.ValidateToken,appointmentController.ListarAgenda)
 router.post('/tecnicos/listar', jwt.ValidateToken, async (req, res) => {
     const { id_client, dt_start, dt_end, id_tecnico } = req.body;
     let filtro = [];
