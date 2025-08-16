@@ -44,5 +44,9 @@ async function Editar(id_appointment, id_client,
 
     return appointment;
 }
+async function ListarAgenda(id_client, dt_start, dt_end, id_tecnico) {
+    const agennda = await appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
+    return agennda;
+}
 
-export default { ListarAll, Inserir, Excluir, ListarId, Editar, ListarTecnico }
+export default { ListarAll, Inserir, Excluir, ListarId, Editar, ListarTecnico, ListarAgenda }
