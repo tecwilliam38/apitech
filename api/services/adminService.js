@@ -29,13 +29,12 @@ async function LoginAdmin(email, password) {
             return [];
     }
 }
-// async function ProfileAdmin(id_admin) {
+async function ProfileAdmin(id_admin) {
 
-//     const admin = await repoUser.ProfileAdmin(id_admin);
+    const adminProfile = await adminRepo.ProfileAdmin(id_admin);
 
-//     return admin;
-// }
-
+    return adminProfile;
+}
 // async function ListarAdmin() {
 
 //     const userAdmin = await adminRepo.ListarAdmin();
@@ -57,6 +56,8 @@ async function LoginAdmin(email, password) {
 //     return userAdmin;
 // }
 
-export default{InserirAdmin, LoginAdmin};
+export default{InserirAdmin, LoginAdmin,
+    ProfileAdmin
+};
 
 

@@ -18,7 +18,7 @@ async function InserirAdmin(name, email, phone_number, password, created_at, upd
     if (emailJaExiste) {
         console.log('Email já cadastrado.');
         return [];
-    } else {        
+    } else {
         let sql = `insert into apitech_admin(name, email, phone_number, password, created_at, updated_at) 
         values($1, $2, $3, $4, current_timestamp, current_timestamp)
         returning id_admin`;
@@ -50,6 +50,21 @@ async function ListarByEmailAdmin(email) {
         console.log(err);
     }
 }
+async function ProfileAdmin(id_admin) {
+
+    let sql = `SELECT 
+         ad.id_admin, 
+         ad.name AS nome, 
+         ad.email, 
+         ad.phone_number AS telefone 
+       FROM apitech_admin AS ad 
+       WHERE ad.id_admin = $1`;
+
+    const adminProfile = await pool.query(sql, [id_admin]);
+
+    return adminProfile.rows[0];
+}
+
 async function ListarAdmin() {
 
     let sql = `select id_admin, name, email from apitech_admin order by name`;
@@ -77,4 +92,11 @@ async function ExcluirAdmin(id_admin) {
 
 
 
-export default { InserirAdmin, ListarByEmailAdmin, ListarAdmin, EditarAdmin, ExcluirAdmin };
+export default {
+    InserirAdmin,
+    ListarByEmailAdmin,
+    ListarAdmin,
+    EditarAdmin,
+    ExcluirAdmin,
+    ProfileAdmin
+};

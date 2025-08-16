@@ -22,8 +22,8 @@ router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient);
 // Rotas do Admin...
 router.post("/admin/register", admminController.InserirAdmin);
 router.post("/admin/login", admminController.LoginAdmin);
-// router.get("/admin/listar", jwt.ValidateToken, controllerAdmin.ListarAdmin);
-// router.get("/admin/appointments", jwt.ValidateToken, appointmentController.Listar);
+router.get("/admin/profile/:id_admin", admminController.ProfileAdmin);
+// router.get("/admin/profile/:id_admin",jwt.VerifyToken, admminController.ProfileAdmin);
 
 // Tecnicos...
 router.post("/tecnicos/register", jwt.ValidateToken, tecnicoController.InserirTecnico);
@@ -43,5 +43,59 @@ router.get("/appointments/listar", jwt.ValidateToken, appointmentController.List
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmentController.ListarId);
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.EditarAdmin);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, appointmentController.Excluir);
+
+// GET /admin/profile
+// GET /admin/profile/:id
+router.get('/profile/:id_admin', async (req, res) => {
+  const id_admin = req.params.id_admin;
+
+  try {
+    const result = await pool.query(
+      `SELECT 
+         ad.id_admin, 
+         ad.name AS nome, 
+         ad.email, 
+         ad.phone_number AS telefone 
+       FROM apitech_admin AS ad 
+       WHERE ad.id_admin = $1`,
+      [id_admin]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Administrador não encontrado' });
+    }
+
+    res.status(200).json(result.rows[0]);
+  } catch (err) {
+    console.error('Erro ao buscar perfil do admin:', err);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+// router.get('/profile', jwt.ValidateToken, async (req, res) => {
+//   const id_admin = req.id_admin;
+
+//   try {
+//     const result = await pool.query(
+//       `SELECT 
+//          ad.id_admin, 
+//          ad.name AS nome, 
+//          ad.email, 
+//          ad.phone_number AS telefone 
+//        FROM apitech_admin AS ad 
+//        WHERE ad.id_admin = $1`,
+//       [id_admin]
+//     );
+
+//     if (result.rows.length === 0) {
+//       return res.status(404).json({ error: 'Administrador não encontrado' });
+//     }
+
+//     res.status(200).json(result.rows[0]);
+//   } catch (err) {
+//     console.error('Erro ao buscar perfil do admin:', err);
+//     res.status(500).json({ error: 'Erro interno do servidor' });
+//   }
+// });
 
 export default router;
