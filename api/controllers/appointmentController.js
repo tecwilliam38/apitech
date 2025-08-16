@@ -1,12 +1,10 @@
 import pool from "../database/db.js";
 import appointmentService from "../services/appointmentService.js";
 
-
-async function ListarTecnico(req, res) {
-    const id_tecnico = req.body.id_tecnico;
-    const appointments = await appointmentService.ListarTecnico(id_tecnico);
-
-    res.status(200).json(appointments);
+async function ListarAgenda(req, res){
+    const { id_client, dt_start, dt_end, id_tecnico } = req.body;
+    const Agenda= await appointmentService.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
+    res.status(200).json(Agenda);
 }
 
 async function ListarAll(req, res) {
@@ -67,11 +65,6 @@ async function EditarAdmin(req, res) {
         id_tecnico, id_service, status, booking_date, booking_hour);
 
     res.status(200).json(appointment);
-}
-async function ListarAgenda(req, res){
-    const { id_client, dt_start, dt_end, id_tecnico } = req.body;
-    const Agenda= await appointmentService.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
-    res.status(200).json(Agenda);
 }
 
 export default {
