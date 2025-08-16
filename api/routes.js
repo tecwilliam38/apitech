@@ -38,7 +38,7 @@ router.post("/tecnicos/skills/:id_tecnico", jwt.ValidateToken, tecnicoController
 
 // Appointments
 router.post("/appointments/insert", jwt.ValidateToken, appointmentController.Inserir);
-router.post("/appointments/listar/tecnico", jwt.ValidateToken, appointmentController.ListarTecnico);
+router.post("/appointments/listar", jwt.ValidateToken, appointmentController.ListarAgenda);
 router.get("/appointments/listar", jwt.ValidateToken, appointmentController.ListarAll);
 // router.post("/agenda/listar", jwt.ValidateToken, appointmentController.ListarAll);
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmentController.ListarId);
@@ -66,8 +66,7 @@ router.post('/tecnicos/listar', jwt.ValidateToken, async (req, res) => {
                                        AND pts.id_service = pa.id_service
     WHERE pa.id_appointment > 0`
     if (id_client) {
-        filtro.push(id_client);
-        // sql += ` AND pa.id_client = $${filtro.length}`;
+        filtro.push(id_client);      
         sql += ` AND pa.id_client = $${index++}`;
     }
 
