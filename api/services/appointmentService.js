@@ -43,4 +43,4 @@ async function Editar(id_appointment, id_client,
 }
 
 
-export default { ListarAll, Inserir, Excluir, ListarId, Editar, ListarTecnico, ListarAgenda }
+export default { ListarAll, Inserir, Excluir, ListarId, Editar, ListarAgenda }

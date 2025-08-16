@@ -68,6 +68,6 @@ async function EditarAdmin(req, res) {
 }
 
 export default {
-    ListarAll, ListarTecnico, Inserir, Excluir, ListarId,
+    ListarAll, Inserir, Excluir, ListarId,
     InserirAdmin, EditarAdmin, ListarAgenda
 };

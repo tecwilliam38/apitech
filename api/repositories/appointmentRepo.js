@@ -185,6 +185,5 @@ export default {
     Excluir, 
     Editar, 
     ListarServicos, 
-    ListarId, 
-    ListarTecnico, 
+    ListarId,     
     ListarAgenda };
