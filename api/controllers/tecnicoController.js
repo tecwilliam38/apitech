@@ -64,6 +64,7 @@ async function ListarServicosTecnico(req, res) {
 
     res.status(200).json(serv_tecnico);
 }
+
 async function TecnicoSkill(req, res) {
 
     const id_tecnico = req.params.id_tecnico;
