@@ -1,17 +1,52 @@
 import appointmentService from "../services/appointmentService.js";
 
-async function ListarAgenda(req, res){
-    const { id_client, dt_start, dt_end, id_tecnico } = req.body;
-    const Agenda= await appointmentService.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
-    res.status(200).json(Agenda);
+async function ListarAgenda(req, res) {
+    const id_tecnico = req.user.id_user;
+    try {
+        const servicos = await appointmentService.ListarAgenda(id_tecnico);
+        res.status(200).json(servicos);
+    } catch (error) {
+        console.error('Erro ao listar serviços:', error);
+        res.status(500).json({ error: 'Erro ao listar serviços' });
+    }
 }
 
+// controllers/appointmentController.js
 async function ListarAll(req, res) {
-    const {id_client, dt_start, dt_end, id_tecnico } = req.body;
-    const appointments = await appointmentService.ListarAll(0, dt_start, dt_end, id_tecnico);
+    try {
+        const { id_client, dt_start, dt_end } = req.query;
+        const id_tecnico = parseInt(req.params.id_tecnico, 10); // força número
 
-    res.status(200).json(appointments);
+        // Chama o service passando os parâmetros
+        const appointments = await appointmentService.ListarAll(            
+            dt_start,
+            dt_end,
+            id_tecnico
+        );
+
+        // Retorna sucesso
+        res.status(200).json(appointments);
+    } catch (error) {
+        console.error("Erro ao listar agendamentos:", error);
+        res.status(500).json({ error: error.message });
+    }
 }
+async function ListarAlll(req, res) {
+    try {
+        const { id_tecnico } = req.params;   // pega do path param
+        const { dt_start, dt_end } = req.query; // datas podem vir como query string
+
+        const appointments = await appointmentService.ListarAll(
+            0, dt_start, dt_end, id_tecnico
+        );
+
+        res.status(200).json(appointments);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+
 
 async function ListarId(req, res) {
 
