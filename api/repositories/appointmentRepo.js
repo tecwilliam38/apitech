@@ -56,7 +56,7 @@ async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
     let filtro = [];
     let index = 1;
 
-    let sql = `SELECT pa.id_appointment, pa.id_tecnico, ps.description AS service, 
+    let sql = `SELECT pa.id_tecnico, pa.id_appointment, ps.description AS service, 
     pt.name AS tecnico, pt.specialty, pa.booking_date, pa.booking_hour, 
     pts.price AS preco, pc.client_name AS cliente,
     pa.id_service, pa.status, pa.id_client

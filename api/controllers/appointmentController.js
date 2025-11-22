@@ -13,24 +13,25 @@ async function ListarAgenda(req, res) {
 
 // controllers/appointmentController.js
 async function ListarAll(req, res) {
-    try {
-        const { id_client, dt_start, dt_end } = req.query;
-        const id_tecnico = parseInt(req.params.id_tecnico, 10); // força número
+  try {
+    const { dt_start, dt_end } = req.query; // filtros opcionais
+    const id_tecnico = parseInt(req.params.id_tecnico, 10); // pega do path param
 
-        // Chama o service passando os parâmetros
-        const appointments = await appointmentService.ListarAll(            
-            dt_start,
-            dt_end,
-            id_tecnico
-        );
-
-        // Retorna sucesso
-        res.status(200).json(appointments);
-    } catch (error) {
-        console.error("Erro ao listar agendamentos:", error);
-        res.status(500).json({ error: error.message });
+    if (isNaN(id_tecnico)) {
+      return res.status(400).json({ error: "id_tecnico inválido" });
     }
+
+    const appointments = await appointmentService.ListarAll(
+      0, dt_start, dt_end, id_tecnico
+    );
+
+    res.status(200).json(appointments);
+  } catch (error) {
+    console.error("Erro ao listar agendamentos:", error);
+    res.status(500).json({ error: error.message });
+  }
 }
+
 async function ListarAlll(req, res) {
     try {
         const { id_tecnico } = req.params;   // pega do path param
