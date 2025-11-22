@@ -163,6 +163,7 @@ async function Excluir(id_appointment) {
 
     }
 }
+
 async function ListarServicos(id_tecnico) {
 
     let sql = `select pts.id_service, s.description, pts.price

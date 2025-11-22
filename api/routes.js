@@ -32,7 +32,7 @@ router.get("/tecnicos/listar", jwt.ValidateToken, tecnicoController.ListarTecnic
 router.get("/tecnicos/listar/:id_tecnico", jwt.ValidateToken, tecnicoController.ListarTecnicoId);
 router.put("/tecnicos/:id_tecnico", jwt.ValidateToken, tecnicoController.EditarTecnico);
 router.delete("/tecnicos/:id_tecnico", jwt.ValidateToken, tecnicoController.ExcluirTecnico);
-router.get("/tecnicos/:id_tecnico/services", jwt.ValidateToken, tecnicoController.ListarServicosTecnico);
+router.get("/tecnicos/services/:id_tecnico", jwt.ValidateToken, tecnicoController.ListarServicosTecnico);
 router.post("/tecnicos/skills/:id_tecnico", jwt.ValidateToken, tecnicoController.TecnicoSkill);
 
 

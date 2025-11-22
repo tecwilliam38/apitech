@@ -1,4 +1,3 @@
-import pool from "../database/db.js";
 import appointmentService from "../services/appointmentService.js";
 
 async function ListarAgenda(req, res){
