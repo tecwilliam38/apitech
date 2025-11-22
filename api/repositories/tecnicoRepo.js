@@ -90,7 +90,7 @@ async function ExcluirTecnico(id_tecnico) {
     return { id_tecnico };
 }
 async function ListarTecnicoServicos(id_tecnico) {
-    let sql = `select pts.id_tecnico as tecnico,pts.id_service, s.description as descricao, pts.price as preco
+    let sql = `select pts.id_tecnico as tecnico, pts.id_service, s.description as descricao, pts.price as preco
     from apitech_tecnicos_services pts
     join apitech_services s on (s.id_service = pts.id_service)
     where pts.id_tecnico = $1
