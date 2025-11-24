@@ -37,16 +37,11 @@ router.post("/tecnicos/skills/:id_tecnico", jwt.ValidateToken, tecnicoController
 
 
 // Appointments
-router.post("/appointments/insert", jwt.ValidateToken, appointmentController.Inserir);
-// router.post("/appointments/listar", jwt.ValidateToken, appointmentController.ListarAgenda);
-// 
 router.get("/appointments/listar",jwt.ValidateToken, appointmentController.listarAgendamentos);
 router.get("/appointments/tecnico/:id_tecnico", jwt.ValidateToken, appointmentController.listarPorTecnico);
-// 
-
-// router.get("/appointments/listar", jwt.ValidateToken, appointmentController.ListarAll);
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmentController.ListarId);
-router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.EditarAdmin);
+router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.Editar);
+router.post("/appointments/insert", jwt.ValidateToken, appointmentController.Inserir);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, appointmentController.Excluir);
 
 export default router;
