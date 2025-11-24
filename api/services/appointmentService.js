@@ -50,6 +50,22 @@ async function inserirService(body) {
   );
 }
 
+async function editarService(id_appointment, body) {
+  const { id_client, id_tecnico, id_service, status, booking_date, booking_hour } = body;
+
+  if (!id_appointment) throw new Error("id_appointment é obrigatório");
+
+  return appointmentRepo.Editar(
+    Number(id_appointment),
+    Number(id_client),
+    Number(id_tecnico),
+    Number(id_service),
+    status,
+    booking_date,
+    booking_hour
+  );
+}
+
 
 async function Excluir(id_client, id_appointment) {
 
@@ -68,4 +84,8 @@ async function Editar(id_appointment, id_client,
 }
 
 
-export default { Inserir, Excluir, ListarId, Editar, listarAgendaService, listarPorTecnicoService };
+export default { 
+    Inserir, Excluir, ListarId, 
+    Editar, listarAgendaService, listarPorTecnicoService,
+    inserirService, editarService
+ };

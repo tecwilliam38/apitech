@@ -30,7 +30,7 @@ async function ListarId(req, res) {
     res.status(200).json(appointments);
 }
 
-async function Inserir(req, res) {
+async function Inserirold(req, res) {
 
     // const id_client = req.id_client;
     const { id_client, id_tecnico, id_service, status,
@@ -41,6 +41,17 @@ async function Inserir(req, res) {
 
     res.status(201).json(appointment);
 }
+
+async function inserir(req, res) {
+  try {
+    const novoAgendamento = await appointmentService.inserirService(req.body);
+    res.status(201).json(novoAgendamento);
+  } catch (error) {
+    console.error("Erro no controller inserir:", error);
+    res.status(400).json({ error: error.message });
+  }
+}
+
 
 async function Excluir(req, res) {
 
@@ -65,5 +76,5 @@ async function Editar(req, res) {
 }
 
 export default {
-    Inserir, Excluir, ListarId, Editar, listarAgendamentos, listarPorTecnico
+    inserir, Excluir, ListarId, Editar, listarAgendamentos, listarPorTecnico
 };
