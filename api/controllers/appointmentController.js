@@ -1,5 +1,30 @@
 import appointmentService from "../services/appointmentService.js";
 
+// src/controllers/appointmentsController.js
+
+
+export async function listarAgendamentos(req, res) {
+  try {
+    const agendamentos = await appointmentService.listarAgendaService(req.query);
+    res.status(200).json(agendamentos);
+  } catch (error) {
+    console.error("Erro no controller listarAgendamentos:", error);
+    res.status(400).json({ error: error.message });
+  }
+}
+
+export async function listarPorTecnico(req, res) {
+  try {
+    const { id_tecnico } = req.params; // pega da rota /appointments/tecnico/:id_tecnico
+    const agendamentos = await appointmentService.listarPorTecnicoService(id_tecnico);
+    res.status(200).json(agendamentos);
+  } catch (error) {
+    console.error("Erro no controller listarPorTecnico:", error);
+    res.status(400).json({ error: error.message });
+  }
+}
+
+
 async function ListarAgenda(req, res) {
     const id_tecnico = req.user.id_user;
     try {
@@ -13,28 +38,29 @@ async function ListarAgenda(req, res) {
 
 // controllers/appointmentController.js
 async function ListarAllTec(req, res) {
-  try {
-    const { dt_start, dt_end } = req.query; // filtros opcionais
-    const id_tecnico = parseInt(req.params.id_tecnico, 10); // pega do path param
+    try {
+        const { dt_start, dt_end } = req.query; // filtros opcionais
+        const id_tecnico = parseInt(req.params.id_tecnico, 10); // pega do path param
 
-    if (isNaN(id_tecnico)) {
-      return res.status(400).json({ error: "id_tecnico inválido" });
+        if (isNaN(id_tecnico)) {
+            return res.status(400).json({ error: "id_tecnico inválido" });
+        }
+
+        const appointments = await appointmentService.ListarAll(
+            0, dt_start, dt_end, id_tecnico
+        );
+
+        res.status(200).json(appointments);
+    } catch (error) {
+        console.error("Erro ao listar agendamentos:", error);
+        res.status(500).json({ error: error.message });
     }
-
-    const appointments = await appointmentService.ListarAll(
-      0, dt_start, dt_end, id_tecnico
-    );
-
-    res.status(200).json(appointments);
-  } catch (error) {
-    console.error("Erro ao listar agendamentos:", error);
-    res.status(500).json({ error: error.message });
-  }
 }
 
 async function ListarAll(req, res) {
     try {
-        const { id_tecnico } = req.params;   // pega do path param
+        const id_tecnico = req.user.id_tecnico; // vem do token decodificado
+        // const { id_tecnico } = req.params;   // pega do path param
         const { dt_start, dt_end } = req.query; // datas podem vir como query string
 
         const appointments = await appointmentService.ListarAll(
@@ -104,5 +130,5 @@ async function EditarAdmin(req, res) {
 
 export default {
     ListarAll, Inserir, Excluir, ListarId,
-    InserirAdmin, EditarAdmin, ListarAgenda,ListarAllTec
+    InserirAdmin, EditarAdmin, ListarAgenda, ListarAllTec, listarAgendamentos, listarPorTecnico
 };

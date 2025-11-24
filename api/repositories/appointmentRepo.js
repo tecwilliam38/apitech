@@ -54,6 +54,7 @@ async function ListarAgenda(id_client, dt_start, dt_end, id_tecnico) {
 
 async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
     let filtro = [];
+    // let filtro = [];
     let index = 1;
 
     let sql = `SELECT pa.id_tecnico, pa.id_appointment, ps.description AS service, 

@@ -1,5 +1,26 @@
 import appointmentRepo from "../repositories/appointmentRepo.js";
 
+export async function listarAgendaService(query) {
+  const { id_client, dt_start, dt_end, id_tecnico } = query;
+
+  // Validação simples
+  if (dt_start && dt_end && new Date(dt_start) > new Date(dt_end)) {
+    throw new Error("Data inicial não pode ser maior que a final");
+  }
+
+  return appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
+}
+
+export async function listarPorTecnicoService(id_tecnico) {
+  if (!id_tecnico) {
+    throw new Error("O parâmetro id_tecnico é obrigatório");
+  }
+
+  // Chama o repository com filtro apenas pelo técnico
+  return appointmentRepo.ListarAgenda(null, null, null, id_tecnico);
+}
+
+
 async function ListarAgenda(id_client, dt_start, dt_end, id_tecnico) {
 
     const agennda = await appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
@@ -43,4 +64,4 @@ async function Editar(id_appointment, id_client,
 }
 
 
-export default { ListarAll, Inserir, Excluir, ListarId, Editar, ListarAgenda }
+export default { ListarAll, Inserir, Excluir, ListarId, Editar, ListarAgenda, listarAgendaService, listarPorTecnicoService };
