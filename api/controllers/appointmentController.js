@@ -12,7 +12,7 @@ async function ListarAgenda(req, res) {
 }
 
 // controllers/appointmentController.js
-async function ListarAll(req, res) {
+async function ListarAllTec(req, res) {
   try {
     const { dt_start, dt_end } = req.query; // filtros opcionais
     const id_tecnico = parseInt(req.params.id_tecnico, 10); // pega do path param
@@ -32,7 +32,7 @@ async function ListarAll(req, res) {
   }
 }
 
-async function ListarAlll(req, res) {
+async function ListarAll(req, res) {
     try {
         const { id_tecnico } = req.params;   // pega do path param
         const { dt_start, dt_end } = req.query; // datas podem vir como query string
@@ -104,5 +104,5 @@ async function EditarAdmin(req, res) {
 
 export default {
     ListarAll, Inserir, Excluir, ListarId,
-    InserirAdmin, EditarAdmin, ListarAgenda
+    InserirAdmin, EditarAdmin, ListarAgenda,ListarAllTec
 };
