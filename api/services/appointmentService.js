@@ -1,6 +1,6 @@
 import appointmentRepo from "../repositories/appointmentRepo.js";
 
-export async function listarAgendaService(query) {
+async function listarAgendaService(query) {
   const { id_client, dt_start, dt_end, id_tecnico } = query;
 
   // Validação simples
@@ -11,7 +11,7 @@ export async function listarAgendaService(query) {
 return appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
 }
 
-export async function listarPorTecnicoService(id_tecnico) {
+async function listarPorTecnicoService(id_tecnico) {
   if (!id_tecnico) {
     throw new Error("O parâmetro id_tecnico é obrigatório");
   }
