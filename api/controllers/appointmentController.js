@@ -9,17 +9,6 @@ export async function listarAgendamentos(req, res) {
     res.status(400).json({ error: error.message });
   }
 }
-// export async function listarAgenda(req, res) {
-//   try {
-//     // Filtros vêm da query string: ?id_tecnico=2&dt_start=2025-11-01&dt_end=2025-11-30
-//     const agendamentos = await listarAgendaService(req.query);
-//     res.status(200).json(agendamentos);
-//   } catch (error) {
-//     console.error("Erro no controller listarAgenda:", error);
-//     res.status(400).json({ error: error.message });
-//   }
-// }
-
 
 export async function listarPorTecnico(req, res) {
   try {

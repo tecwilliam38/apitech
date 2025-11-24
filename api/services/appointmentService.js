@@ -33,6 +33,24 @@ async function Inserir(id_client, id_tecnico, id_service, status, booking_date, 
     return appointment;
 }
 
+async function inserirService(body) {
+  const { id_client, id_tecnico, id_service, status, booking_date, booking_hour } = body;
+
+  if (!id_client || !id_tecnico || !id_service || !status || !booking_date || !booking_hour) {
+    throw new Error("Campos obrigatórios: id_client, id_tecnico, id_service, status, booking_date, booking_hour");
+  }
+
+  return appointmentRepo.Inserir(
+    Number(id_client),
+    Number(id_tecnico),
+    Number(id_service),
+    status,
+    booking_date,
+    booking_hour
+  );
+}
+
+
 async function Excluir(id_client, id_appointment) {
 
     const appointment = await appointmentRepo.Excluir(id_client, id_appointment);
