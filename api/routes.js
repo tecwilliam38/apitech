@@ -41,7 +41,7 @@ router.get("/appointments/listar",jwt.ValidateToken, appointmentController.lista
 router.get("/appointments/tecnico/:id_tecnico", jwt.ValidateToken, appointmentController.listarPorTecnico);
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmentController.ListarId);
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.Editar);
-router.post("/appointments/insert", jwt.ValidateToken, appointmentController.inserir);
+router.post("/appointments/insert", jwt.ValidateToken, appointmentController.Inserir);
 router.delete("/appointments/:id_appointment", jwt.ValidateToken, appointmentController.Excluir);
 
 export default router;
