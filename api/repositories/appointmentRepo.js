@@ -51,58 +51,6 @@ async function ListarAgenda(id_client, dt_start, dt_end, id_tecnico) {
     }    
 }
 
-
-async function ListarAll(id_client, dt_start, dt_end, id_tecnico, status) {
-    let filtro = [];
-    // let filtro = [];
-    let index = 1;
-
-    let sql = `SELECT pa.id_tecnico, pa.id_appointment, ps.description AS service, 
-    pt.name AS tecnico, pt.specialty, pa.booking_date, pa.booking_hour, 
-    pts.price AS preco, pc.client_name AS cliente,
-    pa.id_service, pa.status, pa.id_client
-    FROM apitech_appointments pa
-    JOIN apitech_services ps ON ps.id_service = pa.id_service
-    JOIN apitech_tecnicos pt ON pt.id_tecnico = pa.id_tecnico
-    JOIN apitech_client pc ON pc.id_client = pa.id_client
-    JOIN apitech_tecnicos_services pts ON pts.id_tecnico = pa.id_tecnico 
-                                       AND pts.id_service = pa.id_service
-    WHERE pa.id_appointment > 0`;
-
-    if (id_client) {
-        filtro.push(id_client);
-        // sql += ` AND pa.id_client = $${filtro.length}`;
-        sql += ` AND pa.id_client = $${index++}`;
-    }
-
-    if (dt_start) {
-        filtro.push(dt_start);
-        sql += ` AND pa.booking_date >= $${index++}`;
-    }
-
-    if (dt_end) {
-        filtro.push(dt_end);
-        sql += ` AND pa.booking_date <= $${index++}`;
-    }
-
-    if (id_tecnico) {
-        filtro.push(id_tecnico);
-        sql += ` AND pa.id_tecnico = $${index++}`;
-    }
-
-
-    sql += " ORDER BY pa.booking_date, pa.booking_hour";
-
-    try {
-        const resultado = await pool.query(sql, filtro);
-        // res.status(200).json(resultado.rows);
-        return resultado.rows;
-    } catch (erro) {
-        console.error('Erro ao buscar agendamentos:', erro);
-        throw erro;
-    }
-}
-
 async function ListarId(id_appointment) {
 
     let sql = `select pa.id_appointment, s.description as service, 
@@ -181,8 +129,7 @@ async function ListarServicos(id_tecnico) {
 }
 
 
-export default { 
-    ListarAll, 
+export default {    
     Inserir, 
     Excluir, 
     Editar, 

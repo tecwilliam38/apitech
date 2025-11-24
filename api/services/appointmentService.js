@@ -6,9 +6,9 @@ export async function listarAgendaService(query) {
   // Validação simples
   if (dt_start && dt_end && new Date(dt_start) > new Date(dt_end)) {
     throw new Error("Data inicial não pode ser maior que a final");
-  }
+}
 
-  return appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
+return appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
 }
 
 export async function listarPorTecnicoService(id_tecnico) {
@@ -18,20 +18,6 @@ export async function listarPorTecnicoService(id_tecnico) {
 
   // Chama o repository com filtro apenas pelo técnico
   return appointmentRepo.ListarAgenda(null, null, null, id_tecnico);
-}
-
-
-async function ListarAgenda(id_client, dt_start, dt_end, id_tecnico) {
-
-    const agennda = await appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
-    return agennda;
-}
-
-async function ListarAll(id_client, dt_start, dt_end, id_tecnico) {
-    ''
-    const appointments = await appointmentRepo.ListarAll(id_client, dt_start, dt_end, id_tecnico);
-
-    return appointments;
 }
 
 async function ListarId(id_appointment) {
@@ -64,4 +50,4 @@ async function Editar(id_appointment, id_client,
 }
 
 
-export default { ListarAll, Inserir, Excluir, ListarId, Editar, ListarAgenda, listarAgendaService, listarPorTecnicoService };
+export default { Inserir, Excluir, ListarId, Editar, listarAgendaService, listarPorTecnicoService };

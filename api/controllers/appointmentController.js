@@ -65,6 +65,5 @@ async function Editar(req, res) {
 }
 
 export default {
-    ListarAll, Inserir, Excluir, ListarId,
-    InserirAdmin, Editar, ListarAgenda, ListarAllTec, listarAgendamentos, listarPorTecnico
+    Inserir, Excluir, ListarId, Editar, listarAgendamentos, listarPorTecnico
 };
