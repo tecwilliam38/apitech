@@ -13,7 +13,14 @@ async function verificaEmailExistente(email) {
         return false;
     }
 }
-async function InserirAdmin(name, email, phone_number, password, created_at, updated_at) {
+async function InserirAdmin(
+    name,
+    email,
+    phone_number,
+    password,
+    created_at,
+    updated_at
+) {
     const emailJaExiste = await verificaEmailExistente(email);
     if (emailJaExiste) {
         console.log('Email já cadastrado.');
@@ -38,6 +45,7 @@ async function InserirAdmin(name, email, phone_number, password, created_at, upd
         }
     }
 }
+
 async function ListarByEmailAdmin(email) {
     let sql = `select * from apitech_admin where email = $1`;
     try {
@@ -50,6 +58,7 @@ async function ListarByEmailAdmin(email) {
         console.log(err);
     }
 }
+
 async function ProfileAdmin(id_admin) {
 
     let sql = `SELECT 

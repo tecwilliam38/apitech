@@ -9,6 +9,8 @@ import admminController from "./controllers/admminController.js";
 import tecnicoController from "./controllers/tecnicoController.js";
 import appointmentController from "./controllers/appointmentController.js";
 import pool from "./database/db.js";
+import { login, register, UserController } from "./controllers/userController.js";
+import { UserService } from "./services/userSevice.js";
 
 // Clientes status...
 router.post("/client/register", clientController.InserirClient);
@@ -18,6 +20,13 @@ router.get("/client/listar/:id_client", jwt.ValidateToken, clientController.List
 router.put("/client/:id_client", jwt.ValidateToken, clientController.EditarClient);
 router.delete("/client/delete/:id_client", jwt.ValidateToken, clientController.ExcluirClient);
 router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient);
+
+
+// Rotas Usuários.
+// router.post('/register', register);
+// router.post('/login', login);
+router.post('/users', UserController.register);
+router.post('/login', UserController.login);
 
 // Rotas do Admin...
 router.post("/admin/register", admminController.InserirAdmin);
@@ -37,7 +46,7 @@ router.post("/tecnicos/skills/:id_tecnico", jwt.ValidateToken, tecnicoController
 
 
 // Appointments
-router.get("/appointments/listar",jwt.ValidateToken, appointmentController.listarAgendamentos);
+router.get("/appointments/listar", jwt.ValidateToken, appointmentController.listarAgendamentos);
 router.get("/appointments/tecnico/:id_tecnico", jwt.ValidateToken, appointmentController.listarPorTecnico);
 router.get("/appointments/listar/:id_appointment", jwt.ValidateToken, appointmentController.ListarId);
 router.put("/appointments/edit/:id_appointment", jwt.ValidateToken, appointmentController.Editar);

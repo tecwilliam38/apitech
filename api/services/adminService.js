@@ -12,18 +12,15 @@ async function InserirAdmin(name, email, phone_number, password) {
 
     return admin;
 }
+
 async function LoginAdmin(email, password) {
-
     const admin = await adminRepo.ListarByEmailAdmin(email);
-
     if (!admin)
         return null;
     else {
         if (await bcrypt.compare(password, admin.password)) {
             delete admin.password;
-
             admin.token = jwt.CreateToken(admin.id_admin);
-
             return admin;
         } else
             return [];

@@ -1,0 +1,60 @@
+import { loginUser, registerUser, UserService } from "../services/userSevice.js";
+
+async function InserirAdmin(req, res) {
+
+  const { name, email, phone_number, password } = req.body;
+
+  const user = await adminService.InserirAdmin(name, email, phone_number, password);
+
+  res.status(201).json(user);
+}
+
+export async function register(req, res) {
+  const { user_name, user_email, user_password, user_celphone, user_adress,
+    user_specialty, is_admin, user_genre } = req.body;
+  const user = await registerUser(user_name, user_email, user_password, user_celphone, user_adress,
+    user_specialty, is_admin, user_genre);
+  res.status(201).json(user);
+}
+
+export async function login(req, res) {
+ 
+     const { user_email, user_password } = req.body;
+ 
+     const user = await loginUser(user_email, user_password);
+ 
+     // if (user.length == 0)
+     if (!user)
+         res.status(401).json({ error: "E-mail ou senha inválida" });
+     else
+         res.status(200).json(user);
+}
+
+const userService = new UserService();
+
+export class UserController {
+  static async register(req, res) {
+    try {
+      const { user_name, user_email, user_password, user_celphone, user_adress, user_specialty, is_admin, user_genre } = req.body;
+      const user = await userService.register(user_name, user_email, user_password, user_celphone, user_adress, user_specialty, is_admin, user_genre);
+      res.status(201).json(user);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Erro ao cadastrar usuário' });
+    }
+  }
+
+  static async login(req, res) {
+    try {
+      const { user_email, user_password } = req.body;
+      const user = await userService.login(user_email, user_password);
+      if (!user) {
+        return res.status(401).json({ error: 'E-mail ou senha inválida' });
+      }
+      res.status(200).json(user);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Erro ao realizar login' });
+    }
+  }
+}

@@ -22,13 +22,13 @@ async function LoginAdmin(req, res) {
         res.status(200).json(userAdmin);
 }
 
-async function ProfileAdmin(req, res) {
-   
-    const id_admin = req.params.id_admin;
-    const adminProfile = await adminService.ProfileAdmin(id_admin);
+    async function ProfileAdmin(req, res) {
+    
+        const id_admin = req.params.id_admin;
+        const adminProfile = await adminService.ProfileAdmin(id_admin);
 
-    res.status(200).json(adminProfile);
-}
+        res.status(200).json(adminProfile);
+    }
 
 // async function ListarAdmin(req, res) {
 
