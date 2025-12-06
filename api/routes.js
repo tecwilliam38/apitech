@@ -8,9 +8,9 @@ import clientController from "./controllers/clientController.js";
 import admminController from "./controllers/admminController.js";
 import tecnicoController from "./controllers/tecnicoController.js";
 import appointmentController from "./controllers/appointmentController.js";
-import pool from "./database/db.js";
-import { login, register, UserController } from "./controllers/userController.js";
-import { UserService } from "./services/userSevice.js";
+
+
+import { login, ProfileAdmin, register } from "./controllers/userController.js";
 
 // Clientes status...
 router.post("/client/register", clientController.InserirClient);
@@ -22,11 +22,10 @@ router.delete("/client/delete/:id_client", jwt.ValidateToken, clientController.E
 router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient);
 
 
-// Rotas Usuários.
-// router.post('/register', register);
-// router.post('/login', login);
-router.post('/users', UserController.register);
-router.post('/login', UserController.login);
+// Usuarios
+router.post("/register", register);
+router.post("/login", login);
+router.get("/admin_profile/:id_user", ProfileAdmin);
 
 // Rotas do Admin...
 router.post("/admin/register", admminController.InserirAdmin);
