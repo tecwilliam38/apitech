@@ -27,22 +27,22 @@ async function ListarId(id_appointment) {
     return appointments;
 }
 
-async function Inserir(id_client, id_tecnico, id_service, status, booking_date, booking_hour) {
+async function Inserir(id_client, id_user, id_service, status, booking_date, booking_hour) {
     const appointment = await appointmentRepo.Inserir(id_client,
-        id_tecnico, id_service, status, booking_date, booking_hour);
+        id_user, id_service, status, booking_date, booking_hour);
     return appointment;
 }
 
 async function inserirService(body) {
-  const { id_client, id_tecnico, id_service, status, booking_date, booking_hour } = body;
+  const { id_client, id_user, id_service, status, booking_date, booking_hour } = body;
 
-  if (!id_client || !id_tecnico || !id_service || !status || !booking_date || !booking_hour) {
-    throw new Error("Campos obrigatórios: id_client, id_tecnico, id_service, status, booking_date, booking_hour");
+  if (!id_client || !id_user || !id_service || !status || !booking_date || !booking_hour) {
+    throw new Error("Campos obrigatórios: id_client, id_user, id_service, status, booking_date, booking_hour");
   }
 
   return appointmentRepo.Inserir(
     Number(id_client),
-    Number(id_tecnico),
+    Number(id_user),
     Number(id_service),
     status,
     booking_date,
@@ -58,7 +58,7 @@ async function editarService(id_appointment, body) {
   return appointmentRepo.Editar(
     Number(id_appointment),
     Number(id_client),
-    Number(id_tecnico),
+    Number(id_user),
     Number(id_service),
     status,
     booking_date,
@@ -75,10 +75,10 @@ async function Excluir(id_client, id_appointment) {
 }
 
 async function Editar(id_appointment, id_client,
-    id_tecnico, id_service, status, booking_date, booking_hour) {
+    id_user, id_service, status, booking_date, booking_hour) {
 
     const appointment = await appointmentRepo.Editar(id_appointment, id_client,
-        id_tecnico, id_service, status, booking_date, booking_hour);
+        id_user, id_service, status, booking_date, booking_hour);
 
     return appointment;
 }
