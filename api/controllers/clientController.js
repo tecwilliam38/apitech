@@ -3,10 +3,10 @@ import clientService from "../services/clientService.js";
 
 async function InserirClient(req, res) {
     const { client_name, doc_id, endereco_rua, endereco_bairro,
-        endereco_cidade, endereco_uf, phone_contato, task, email, password } = req.body;
+        endereco_cidade, endereco_uf, phone_contato, task, client_email, client_password } = req.body;
 
     const client = await clientService.InserirClient(client_name, doc_id, endereco_rua, endereco_bairro,
-        endereco_cidade, endereco_uf, phone_contato, task, email, password);
+        endereco_cidade, endereco_uf, phone_contato, task, client_email, client_password);
     res.status(201).json(client);
 }
 async function ProfileClient(req, res) {

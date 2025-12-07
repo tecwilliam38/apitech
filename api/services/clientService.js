@@ -5,12 +5,11 @@ import jwt from "../token.js"
 
 
 async function InserirClient(client_name, doc_id, endereco_rua, endereco_bairro,
-    endereco_cidade,endereco_uf, phone_contato, task, email, password) {
-
-    const hashPassword = await bcrypt.hash(password, 10);
+    endereco_cidade,endereco_uf, phone_contato, task, client_email, client_password) {
+        
+    const hashPassword = await bcrypt.hash(client_password, 10);
     const client = await clientRepo.InserirClient(client_name, doc_id, endereco_rua, endereco_bairro,
-        endereco_cidade, endereco_uf, phone_contato, task, email, hashPassword);
-
+        endereco_cidade, endereco_uf, phone_contato, task, client_email, hashPassword);
     client.token = jwt.CreateToken(client.id_client);
 
     return client;

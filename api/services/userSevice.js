@@ -34,10 +34,10 @@ export class UserService {
     if (!isValid) throw new Error("Senha inválida");
 
     // gera token corretamente
-    token = jwt.CreateToken(user.id_user);
+    user.token = jwt.CreateToken(user.id_user);
 
     delete user.user_pass;
-    return  { user, token };
+    return  user;
   }
 
   async ProfileAdmin(id_user) {
