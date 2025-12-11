@@ -1,7 +1,4 @@
 import pool from "../database/db.js";
-// import pool from "../database/aiven.js";
-// import pool from "../database/neon.js";
-// us.price AS preco,
 
 async function ListarAgenda(id_client, dt_start, dt_end, id_user) {
     let filtro = [];

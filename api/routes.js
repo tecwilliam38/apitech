@@ -10,7 +10,7 @@ import tecnicoController from "./controllers/tecnicoController.js";
 import appointmentController from "./controllers/appointmentController.js";
 
 
-import { login, ProfileAdmin, register } from "./controllers/userController.js";
+import { listar, login, ProfileAdmin, register } from "./controllers/userController.js";
 
 // Clientes status...
 router.post("/client/register", clientController.InserirClient);
@@ -34,6 +34,9 @@ router.get("/admin/profile/:id_admin", admminController.ProfileAdmin);
 // router.get("/admin/profile/:id_admin",jwt.VerifyToken, admminController.ProfileAdmin);
 
 // Tecnicos...
+router.get("/listar", jwt.ValidateToken, listar);
+
+
 router.post("/tecnicos/register", jwt.ValidateToken, tecnicoController.InserirTecnico);
 router.post("/tecnicos/login", tecnicoController.LoginTecnico);
 router.get("/tecnicos/listar", jwt.ValidateToken, tecnicoController.ListarTecnico);
