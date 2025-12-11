@@ -33,15 +33,6 @@ export async function ProfileAdmin(req, res) {
     res.status(200).json(adminProfile);
 }
 
-// export async function listar(req, res) {
-//     try {
-//       const requestingUser = req.user; // vem do middleware de autenticação
-//       const users = await userService.listUsers(requestingUser);
-//       return res.json(users);
-//     } catch (error) {
-//       return res.status(403).json({ error: error.message });
-//     }
-//   }
 export async function listar(req, res) {
   try {
     const users = await userService.listUsers();
