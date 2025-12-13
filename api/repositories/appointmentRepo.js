@@ -6,26 +6,25 @@ async function ListarAgenda(id_client, dt_start, dt_end, id_user) {
 
     let sql = `
     SELECT 
-      pa.id_appointment,
-      pa.id_user,
-      us.description as service,
-      u.user_name as tecnico,
-      u.user_skill as specialty,
-      u.user_genre as genre,
-      pa.booking_date as date,
-      pa.booking_hour as hour, 
-      c.client_name AS cliente,
-      pa.id_service,
-      pa.status,
-      pa.id_client,
-      usv.price as preco
-    FROM appointments pa
-    JOIN user_skill us ON us.id_service = pa.id_service
-    JOIN users u ON u.id_user = pa.id_user
-    JOIN client c ON c.id_client = pa.id_client
-    LEFT JOIN user_services usv ON usv.id_user = pa.id_user 
-                               AND usv.id_service = pa.id_service
-    WHERE pa.id_appointment > 0
+    pa.id_appointment,
+    pa.id_user,
+    us.description AS service,
+    u.user_name AS tecnico,
+    u.user_skill AS specialty,
+    u.user_genre AS genre,
+    pa.booking_date AS date,
+    pa.booking_hour AS hour,
+    c.client_name AS cliente,
+    pa.id_service,
+    pa.status,
+    pa.id_client,
+    usv.price AS preco
+FROM appointments pa
+JOIN user_skill us ON us.id_service = pa.id_service
+JOIN users u ON u.id_user = pa.id_user
+JOIN client c ON c.id_client = pa.id_client
+JOIN user_services usv ON pa.id_user_service = usv.id_user_service
+WHERE pa.id_appointment > 0;
   `;
 
     if (id_client) {
