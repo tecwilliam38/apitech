@@ -54,7 +54,8 @@ async function ProfileClient(id_client) {
 async function ListarClient() {
 
     let sql = `select id_client, client_name, doc_id as inep, endereco_rua, endereco_bairro, 
-    task as tarefa, endereco_cidade, phone_contato, client_email as email from client order by client_name`;
+    task as tarefa, endereco_cidade, phone_contato, 
+    client_email as email from client order by client_name`;
     const clients = await pool.query(sql, []);
     return clients.rows;
 }
