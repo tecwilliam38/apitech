@@ -56,8 +56,8 @@ async function ListarAgenda(id_client, dt_start, dt_end, id_user) {
 
   try {
     const agenda = await pool.query(sql, filtro);
-    console.log("SQL:", sql, "Params:", filtro);
-    console.log("Rows:", agenda.rows);
+    // console.log("SQL:", sql, "Params:", filtro);
+    // console.log("Rows:", agenda.rows);
     return agenda.rows;
   } catch (erro) {
     console.error("Erro ao buscar agendamentos:", erro);
@@ -86,18 +86,27 @@ async function ListarId(id_appointment) {
 }
 
 async function Inserir(id_client, id_user, id_service, status, booking_date, booking_hour) {
-
-    let sql = `insert into appointments(id_client, id_user, 
-               id_service, status, booking_date, booking_hour) 
-         values($1, $2, $3, $4, $5, $6) returning id_appointment`;
-    try {
-        const appointment = await pool.query(sql, [id_client,
-            id_user, id_service, status, booking_date, booking_hour]);
-        return appointment.rows[0];
-    } catch (err) {
-        console.error("Erro ao inserir agendamento:", err);
-        throw err; // ou return { success: false, error: err.message };
-    }
+  const sql = `
+    INSERT INTO appointments (id_client, id_user, id_service, status, booking_date, booking_hour, price)
+    SELECT $1, $2, $3, $4, $5, $6, usv.price
+    FROM user_services usv
+    WHERE usv.id_user = $2 AND usv.id_service = $3
+    RETURNING id_appointment, price;
+  `;
+  try {
+    const appointment = await pool.query(sql, [
+      id_client,
+      id_user,
+      id_service,
+      status,
+      booking_date,
+      booking_hour
+    ]);
+    return appointment.rows[0];
+  } catch (err) {
+    console.error("Erro ao inserir agendamento:", err);
+    throw err;
+  }
 }
 
 async function Editar(id_appointment, id_client,
