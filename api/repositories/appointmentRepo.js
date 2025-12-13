@@ -1,62 +1,68 @@
 import pool from "../database/db.js";
 
 async function ListarAgenda(id_client, dt_start, dt_end, id_user) {
-    let filtro = [];
-    let index = 1;
+  let filtro = [];
+  let index = 1;
 
-    let sql = `
-        SELECT 
-            pa.id_appointment,
-            pa.id_user,
-            us.description as service,
-            u.user_name as tecnico,
-            u.user_skill as specialty,
-            u.user_genre as genre,
-            pa.booking_date as date,
-            pa.booking_hour as hour, 
-            c.client_name AS cliente,
-            pa.id_service,
-            pa.status,
-            pa.id_client,
-            usv.price as preco
-        FROM appointments pa
-        JOIN user_skill us ON us.id_service = pa.id_service
-        JOIN users u ON u.id_user = pa.id_user
-        JOIN client c ON c.id_client = pa.id_client
-        JOIN user_services usv ON usv.id_user = pa.id_user 
-                        AND usv.id_service = pa.id_service
-        WHERE pa.id_appointment > 0
-    `;    
+  let sql = `
+    SELECT 
+      pa.id_appointment,
+      pa.id_user,
+      us.description as service,
+      u.user_name as tecnico,
+      u.user_skill as specialty,
+      u.user_genre as genre,
+      pa.booking_date as date,
+      pa.booking_hour as hour, 
+      c.client_name AS cliente,
+      pa.id_service,
+      pa.status,
+      pa.id_client,
+      usv.price as preco
+    FROM appointments pa
+    JOIN user_skill us ON us.id_service = pa.id_service
+    JOIN users u ON u.id_user = pa.id_user
+    JOIN client c ON c.id_client = pa.id_client
+    LEFT JOIN user_services usv ON usv.id_user = pa.id_user 
+                               AND usv.id_service = pa.id_service
+    WHERE pa.id_appointment > 0
+  `;
 
-    if (id_client) {
-        filtro.push(id_client);
-        sql += ` AND pa.id_client = $${index++}`;
-    }
+  if (id_client) {
+    sql += ` AND pa.id_client = $${index}`;
+    filtro.push(id_client);
+    index++;
+  }
 
-    if (dt_start) {
-        filtro.push(dt_start);
-        sql += ` AND pa.booking_date >= $${index++}`;
-    }
+  if (dt_start) {
+    sql += ` AND pa.booking_date >= $${index}`;
+    filtro.push(dt_start);
+    index++;
+  }
 
-    if (dt_end) {
-        filtro.push(dt_end);
-        sql += ` AND pa.booking_date <= $${index++}`;
-    }
+  if (dt_end) {
+    sql += ` AND pa.booking_date <= $${index}`;
+    filtro.push(dt_end);
+    index++;
+  }
 
-    if (id_user) {
-        filtro.push(id_user);
-        sql += ` AND pa.id_user = $${index++}`;
-    }
+  if (id_user) {
+    sql += ` AND pa.id_user = $${index}`;
+    filtro.push(id_user);
+    index++;
+  }
 
-    sql += " ORDER BY pa.booking_date, pa.booking_hour";
+  sql += " ORDER BY pa.booking_date, pa.booking_hour";
 
-    try {
-        const agenda = await pool.query(sql, filtro);
-        return agenda.rows;
-    } catch (erro) {
-        console.error('Erro ao buscar agendamentos:', erro);
-        throw erro;
-    }
+  try {
+    const agenda = await pool.query(sql, filtro);
+    console.log("SQL:", sql, "Params:", filtro);
+    console.log("Rows:", agenda.rows);
+    return agenda.rows;
+  } catch (erro) {
+    console.error("Erro ao buscar agendamentos:", erro);
+    throw erro;
+  }
 }
 
 async function ListarId(id_appointment) {
