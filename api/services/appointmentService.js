@@ -6,9 +6,9 @@ async function listarAgendaService(query) {
   // Validação simples
   if (dt_start && dt_end && new Date(dt_start) > new Date(dt_end)) {
     throw new Error("Data inicial não pode ser maior que a final");
-}
+  }
 
-return appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
+  return appointmentRepo.ListarAgenda(id_client, dt_start, dt_end, id_tecnico);
 }
 
 async function listarPorTecnicoService(id_tecnico) {
@@ -22,15 +22,15 @@ async function listarPorTecnicoService(id_tecnico) {
 
 async function ListarId(id_appointment) {
 
-    const appointments = await appointmentRepo.ListarId(id_appointment);
+  const appointments = await appointmentRepo.ListarId(id_appointment);
 
-    return appointments;
+  return appointments;
 }
 
 async function Inserir(id_client, id_user, id_service, status, booking_date, booking_hour) {
-    const appointment = await appointmentRepo.Inserir(id_client,
-        id_user, id_service, status, booking_date, booking_hour);
-    return appointment;
+  const appointment = await appointmentRepo.Inserir(id_client,
+    id_user, id_service, status, booking_date, booking_hour);
+  return appointment;
 }
 
 async function inserirService(body) {
@@ -51,7 +51,7 @@ async function inserirService(body) {
 }
 
 async function editarService(id_appointment, body) {
-  const { id_client, id_tecnico, id_service, status, booking_date, booking_hour } = body;
+  const { id_client, id_user, id_service, status, booking_date, booking_hour } = body;
 
   if (!id_appointment) throw new Error("id_appointment é obrigatório");
 
@@ -69,23 +69,23 @@ async function editarService(id_appointment, body) {
 
 async function Excluir(id_client, id_appointment) {
 
-    const appointment = await appointmentRepo.Excluir(id_client, id_appointment);
+  const appointment = await appointmentRepo.Excluir(id_client, id_appointment);
 
-    return appointment;
+  return appointment;
 }
 
 async function Editar(id_appointment, id_client,
-    id_user, id_service, status, booking_date, booking_hour) {
+  id_user, id_service, status, booking_date, booking_hour) {
 
-    const appointment = await appointmentRepo.Editar(id_appointment, id_client,
-        id_user, id_service, status, booking_date, booking_hour);
+  const appointment = await appointmentRepo.Editar(id_appointment, id_client,
+    id_user, id_service, status, booking_date, booking_hour);
 
-    return appointment;
+  return appointment;
 }
 
 
-export default { 
-    Inserir, Excluir, ListarId, 
-    Editar, listarAgendaService, listarPorTecnicoService,
-    inserirService, editarService
- };
+export default {
+  Inserir, Excluir, ListarId,
+  Editar, listarAgendaService, listarPorTecnicoService,
+  inserirService, editarService
+};

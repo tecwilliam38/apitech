@@ -25,7 +25,7 @@ JOIN users u            ON u.id_user = pa.id_user
 JOIN client c           ON c.id_client = pa.id_client
 JOIN user_services usv  ON pa.id_user_service = usv.id_user_service
 WHERE pa.id_appointment > 0 `;
-// ORDER BY pa.booking_date, pa.booking_hour;
+    // ORDER BY pa.booking_date, pa.booking_hour;
 
     if (id_client) {
         sql += ` AND pa.id_client = $${index}`;
@@ -111,18 +111,44 @@ async function Inserir(id_client, id_user, id_service, status, booking_date, boo
     }
 }
 
-async function Editar(id_appointment, id_client,
-    id_tecnico, id_service, status, booking_date, booking_hour) {
+async function Editar(
+    id_appointment,
+    id_client,
+    id_user,
+    id_service,
+    status,
+    booking_date,
+    booking_hour
+) {
+    const sql = `
+    UPDATE appointments
+    SET id_client = $1,
+        id_user = $2,
+        id_service = $3,
+        status = $4,
+        booking_date = $5,
+        booking_hour = $6
+    WHERE id_appointment = $7
+    RETURNING *;
+  `;
 
-    let sql = `update apitech_appointments set id_client=$1, id_tecnico=$2, 
-     id_service=$3, status =$4, booking_date=$5, booking_hour=$6 
-     where id_appointment=$7`;
+    const result = await pool.query(sql, [
+        id_client,
+        id_user,
+        id_service,
+        status,
+        booking_date,
+        booking_hour,
+        id_appointment,
+    ]);
 
-    await pool.query(sql, [id_client,
-        id_tecnico, id_service, status, booking_date, booking_hour, id_appointment]);
+    if (result.rowCount === 0) {
+        throw new Error("Agendamento não encontrado");
+    }
 
-    return { id_appointment };
+    return result.rows[0]; // retorna o registro atualizado
 }
+
 async function Excluir(id_appointment) {
 
     let sql = `delete from appointments where id_appointment = $1`;

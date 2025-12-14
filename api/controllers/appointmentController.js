@@ -52,8 +52,8 @@ async function Excluir(req, res) {
 
 async function Editar(req, res) {
   try {
-    const { id } = req.params; // rota /appointments/:id
-    const agendamentoEditado = await appointmentService.editarService(id, req.body);
+    const { id_appointment } = req.params; // rota /appointments/:id
+    const agendamentoEditado = await appointmentService.editarService(id_appointment, req.body);
     res.status(200).json(agendamentoEditado);
   } catch (error) {
     console.error("Erro no controller editar:", error);
