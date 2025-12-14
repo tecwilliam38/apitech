@@ -130,7 +130,7 @@ async function Excluir(id_appointment) {
     try {
         const appointment = await pool.query(sql, [id_appointment]);
 
-        return { id_appointment };
+        return { mensagem: "Agendamento excluido " + id_appointment };
     } catch (err) {
         console.log(err);
 
