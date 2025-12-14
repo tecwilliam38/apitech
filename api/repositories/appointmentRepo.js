@@ -125,7 +125,7 @@ async function Editar(id_appointment, id_client,
 }
 async function Excluir(id_appointment) {
 
-    let sql = `delete from apitech_appointments where id_appointment = $1`;
+    let sql = `delete from appointments where id_appointment = $1`;
 
     try {
         const appointment = await pool.query(sql, [id_appointment]);
