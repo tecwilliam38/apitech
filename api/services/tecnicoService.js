@@ -53,9 +53,9 @@ async function ExcluirTecnico(id_tecnico) {
     return tecnicos;
 }
 
-async function ListarTecnicoServicos(id_tecnico) {
+async function ListarTecnicoServicos(id_user) {
 
-    const serv_tecnico = await tecnicoRepo.ListarTecnicoServicos(id_tecnico);
+    const serv_tecnico = await tecnicoRepo.ListarTecnicoServicos(id_user);
 
     return serv_tecnico;
 }

@@ -89,14 +89,19 @@ async function ExcluirTecnico(id_tecnico) {
 
     return { id_tecnico };
 }
-async function ListarTecnicoServicos(id_tecnico) {
-    let sql = `select pts.id_service, s.description as descricao, pts.price as preco
-    from apitech_tecnicos_services pts
-    join apitech_services s on (s.id_service = pts.id_service)
-    where pts.id_tecnico = $1
+async function ListarTecnicoServicos(id_user) {
+    let sql = `select us.id_service, s.description as descricao, us.price as preco
+    from user_services us
+    join user_skill s on (s.id_service = us.id_service)
+    where us.id_tecnico = $1
     order by s.description`;
+    // let sql = `select pts.id_service, s.description as descricao, pts.price as preco
+    // from apitech_tecnicos_services pts
+    // join apitech_services s on (s.id_service = pts.id_service)
+    // where pts.id_tecnico = $1
+    // order by s.description`;
 
-    const serv_tecnico = await pool.query(sql, [id_tecnico]);
+    const serv_tecnico = await pool.query(sql, [id_user]);
 
     return serv_tecnico.rows;
 }
