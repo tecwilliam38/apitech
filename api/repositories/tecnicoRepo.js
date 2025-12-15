@@ -93,7 +93,7 @@ async function ListarTecnicoServicos(id_user) {
     let sql = `select us.id_service, s.description as descricao, us.price as preco
     from user_services us
     join user_skill s on (s.id_service = us.id_service)
-    where us.id_tecnico = $1
+    where us.id_user = $1
     order by s.description`;
     // let sql = `select pts.id_service, s.description as descricao, pts.price as preco
     // from apitech_tecnicos_services pts
