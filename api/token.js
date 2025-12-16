@@ -15,8 +15,8 @@ function CreateToken(user) {
       id_user: user.id_user,      // id do usuário    
       user_skill: user.user_skill // aqui você insere a skill
     },
-    secretToken,
-    { expiresIn: "9999999" }
+    secretToken
+    // { expiresIn: "9999999" }
   );
 
   return token;
