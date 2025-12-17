@@ -64,19 +64,40 @@ WHERE pa.id_appointment > 0 `;
     }
 }
 
-async function ListarId(id_appointment) {
 
-    let sql = `select pa.id_appointment, s.description as service, 
-    pt.name as tecnico, pt.specialty,
-    pa.booking_date, pa.booking_hour, pc.client_name as client, pts.price, pa.id_tecnico, 
-    pa.id_service,pa.status, pa.id_client
-    from apitech_appointments pa
-    join apitech_services s on (s.id_service = pa.id_service)
-    join apitech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
-    join apitech_client pc on (pc.id_client = pa.id_client)
-    left join apitech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
-                            pts.id_service = pa.id_service)
-    where pa.id_appointment = $1
+// let sql = `select pa.id_appointment, s.description as service, 
+// pt.name as tecnico, pt.specialty,
+// pa.booking_date, pa.booking_hour, pc.client_name as client, pts.price, pa.id_tecnico, 
+// pa.id_service,pa.status, pa.id_client
+// from apitech_appointments pa
+// join apitech_services s on (s.id_service = pa.id_service)
+// join apitech_tecnicos pt on (pt.id_tecnico = pa.id_tecnico)
+// join apitech_client pc on (pc.id_client = pa.id_client)
+// left join apitech_tecnicos_services pts on (pts.id_tecnico = pa.id_tecnico and 
+//                         pts.id_service = pa.id_service)
+// where pa.id_appointment = $1
+// order by pa.booking_date, pa.booking_hour  `;
+async function ListarId(id_appointment) {
+    let sql = `SELECT 
+  pa.id_appointment,
+  pa.id_user,
+  us.description AS service,
+  u.user_name AS tecnico,
+  u.user_skill AS specialty,
+  u.user_genre AS genre,
+  pa.booking_date AS date,
+  pa.booking_hour AS hour,
+  c.client_name AS cliente,
+  pa.id_service,
+  pa.status,
+  pa.id_client,
+  usv.price AS preco
+    FROM appointments pa
+    JOIN user_skill us      ON us.id_service = pa.id_service
+    JOIN users u            ON u.id_user = pa.id_user
+    JOIN client c           ON c.id_client = pa.id_client
+    JOIN user_services usv  ON pa.id_user_service = usv.id_user_service
+    WHERE pa.id_appointment = $1 
     order by pa.booking_date, pa.booking_hour  `;
 
     const appointments = await pool.query(sql, [id_appointment]);
