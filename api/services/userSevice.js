@@ -47,7 +47,15 @@ export class UserService {
   
       return adminProfile;
   }
+
   async listUsers(requestingUser) {   
     return await this.userRepo.findUsersWithoutAdmin();
   }
+
+  async listUserServices(id_user) {
+  // pode adicionar regras extras aqui, ex: validar se usuário existe
+  const services = await this.userRepo.getUserServices(id_user);
+  return services;
+}
+
 }

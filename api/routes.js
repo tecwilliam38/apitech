@@ -10,7 +10,7 @@ import tecnicoController from "./controllers/tecnicoController.js";
 import appointmentController from "./controllers/appointmentController.js";
 
 
-import { listar, login, ProfileAdmin, register } from "./controllers/userController.js";
+import { getUserServices, listar, login, ProfileAdmin, register } from "./controllers/userController.js";
 
 // Clientes status...
 router.post("/client/register", clientController.InserirClient);
@@ -26,6 +26,8 @@ router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient);
 router.post("/register", register);
 router.post("/login", login);
 router.get("/admin_profile/:id_user", ProfileAdmin);
+router.get('/users/services/:id_user', getUserServices);
+
 
 // Rotas do Admin...
 router.post("/admin/register", admminController.InserirAdmin);

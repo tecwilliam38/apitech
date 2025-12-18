@@ -26,11 +26,11 @@ export async function login(req, res) {
 }
 
 export async function ProfileAdmin(req, res) {
-   
-    const id_user = req.params.id_user;
-    const adminProfile = await userService.ProfileAdmin(id_user);
 
-    res.status(200).json(adminProfile);
+  const id_user = req.params.id_user;
+  const adminProfile = await userService.ProfileAdmin(id_user);
+
+  res.status(200).json(adminProfile);
 }
 
 export async function listar(req, res) {
@@ -39,5 +39,21 @@ export async function listar(req, res) {
     return res.json(users);
   } catch (error) {
     return res.status(500).json({ error: "Erro ao listar usuários." });
+  }
+}
+
+export async function getUserServices(req, res) {
+  try {
+    const { id_user } = req.params;
+    const services = await userService.listUserServices(id_user);
+
+    if (!services || services.length === 0) {
+      return res.status(404).json({ message: 'Nenhuma habilidade encontrada para este técnico.' });
+    }
+
+    return res.json(services);
+  } catch (error) {
+    console.error('Erro ao buscar habilidades:', error);
+    return res.status(500).json({ message: 'Erro interno ao buscar habilidades.' });
   }
 }

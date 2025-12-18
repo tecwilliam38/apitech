@@ -52,6 +52,19 @@ export class UserRepository {
     const result = await pool.query(query, values);
     return result.rows;
   }
-
+  async getUserServices(id_user) {
+    const query = `
+    SELECT 
+      us.id_service,
+      s.description
+    FROM user_services AS us
+    INNER JOIN user_skill AS s
+      ON us.id_service = s.id_service
+    WHERE us.id_user = $1
+    order by s.description
+  `;
+    const result = await pool.query(query, [id_user]);
+    return result.rows;
+  }
 
 }
