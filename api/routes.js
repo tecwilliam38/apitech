@@ -26,7 +26,7 @@ router.post('/client/buscar', jwt.ValidateToken, clientController.BuscarClient);
 router.post("/register", register);
 router.post("/login", login);
 router.get("/admin_profile/:id_user", ProfileAdmin);
-router.get('/users/services/:id_user', getUserServices);
+router.get('/users/services/:id_user', getUserServices); //Funciona no app
 
 
 // Rotas do Admin...
