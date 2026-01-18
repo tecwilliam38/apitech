@@ -100,37 +100,31 @@ async function EditarAdmin(
     user_genre,
     user_skill
 ) {
-    try {
-        const sql = `
-      UPDATE users
-      SET user_name   = $1,
-          user_email  = $2,
-          user_contact= $3,
-          user_adress = $4,
-          user_genre  = $5,
-          user_skill  = $6
-      WHERE id_user   = $7
-      RETURNING *;
-    `;
+    const sql = `
+    UPDATE users
+    SET user_name   = $1,
+        user_email  = $2,
+        user_contact= $3,
+        user_adress = $4,
+        user_genre  = $5,
+        user_skill  = $6,
+        updated_at  = NOW()
+    WHERE id_user   = $7
+    RETURNING *;
+  `;
 
-        const values = [
-            user_name,
-            user_email,
-            user_contact,
-            user_adress,
-            user_genre,
-            user_skill,
-            id_user,
-        ];
+    const values = [
+        user_name,
+        user_email,
+        user_contact,
+        user_adress,
+        user_genre,
+        user_skill,
+        id_user,
+    ];
 
-        const result = await pool.query(sql, values);
-
-        // retorna o registro atualizado
-        return result.rows[0];
-    } catch (error) {
-        console.error("Erro ao atualizar usuário:", error.message);
-        throw error; // relança o erro para ser tratado no controller
-    }
+    const result = await pool.query(sql, values);
+    return result.rows[0];
 }
 async function ExcluirAdmin(id_admin) {
 
