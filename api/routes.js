@@ -33,7 +33,7 @@ router.get('/users/services/:id_user', getUserServices); //Funciona no app
 router.post("/admin/register", admminController.InserirAdmin);
 router.post("/admin/login", admminController.LoginAdmin);
 router.get("/admin/profile/:id_admin", admminController.ProfileAdmin);
-router.put("/admin/:id_admin",jwt.ValidateToken, admminController.EditarAdmin);
+router.put("/admin/:id_user",jwt.ValidateToken, admminController.EditarAdmin);
 // router.get("/admin/profile/:id_admin",jwt.VerifyToken, admminController.ProfileAdmin);
 
 // Tecnicos...
