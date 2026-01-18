@@ -22,13 +22,13 @@ async function LoginAdmin(req, res) {
         res.status(200).json(userAdmin);
 }
 
-    async function ProfileAdmin(req, res) {
-    
-        const id_admin = req.params.id_admin;
-        const adminProfile = await adminService.ProfileAdmin(id_admin);
+async function ProfileAdmin(req, res) {
 
-        res.status(200).json(adminProfile);
-    }
+    const id_admin = req.params.id_admin;
+    const adminProfile = await adminService.ProfileAdmin(id_admin);
+
+    res.status(200).json(adminProfile);
+}
 
 // async function ListarAdmin(req, res) {
 
@@ -37,16 +37,28 @@ async function LoginAdmin(req, res) {
 //     res.status(200).json(userAdmin);
 // }
 
+// Controller
 async function EditarAdmin(req, res) {
+    try {
+        const id_user = req.params.id_user;
+        const { user_name, user_email, user_contact, user_adress, user_genre, user_skill } = req.body;
 
-    const id_user = req.params.id_user;
-    const { user_name, user_email, user_contact, user_adress, user_genre, user_skill } = req.body;
+        const userAdmin = await adminService.EditarAdmin(
+            id_user,
+            user_name,
+            user_email,
+            user_contact,
+            user_adress,
+            user_genre,
+            user_skill
+        );
 
-    const userAdmin = await adminService.EditarAdmin(id_user, user_name, user_email, user_contact, user_adress, user_genre, user_skill);
-
-    res.status(200).json(userAdmin);
+        res.status(200).json(userAdmin);
+    } catch (error) {
+        console.error("Erro no controller EditarAdmin:", error.message);
+        res.status(500).json({ error: error.message });
+    }
 }
-
 // async function ExcluirAdmin(req, res) {
 
 //     const id_admin = req.params.id_admin;
@@ -56,4 +68,4 @@ async function EditarAdmin(req, res) {
 //     res.status(200).json(userAdmin);
 // }
 
-export default {InserirAdmin, LoginAdmin, ProfileAdmin, EditarAdmin}
+export default { InserirAdmin, LoginAdmin, ProfileAdmin, EditarAdmin }

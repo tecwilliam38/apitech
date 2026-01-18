@@ -39,11 +39,23 @@ async function ProfileAdmin(id_admin) {
 //     return userAdmin;
 // }
 
+// Service
 async function EditarAdmin(id_user, user_name, user_email, user_contact, user_adress, user_genre, user_skill) {
-
-    const userAdmin = await adminRepo.EditarAdmin(id_user, user_name, user_email, user_contact, user_adress, user_genre, user_skill);
-
-    return userAdmin;
+    try {
+        const userAdmin = await adminRepo.EditarAdmin(
+            id_user,
+            user_name,
+            user_email,
+            user_contact,
+            user_adress,
+            user_genre,
+            user_skill
+        );
+        return userAdmin;
+    } catch (error) {
+        console.error("Erro no service EditarAdmin:", error.message);
+        throw error;
+    }
 }
 
 // async function ExcluirAdmin(id_admin) {
