@@ -39,10 +39,10 @@ async function LoginAdmin(req, res) {
 
 async function EditarAdmin(req, res) {
 
-    const id_admin = req.params.id_admin;
-    const { name, email, phone_number, user_adress, user_genre, user_skill } = req.body;
+    const id_user = req.params.id_user;
+    const { user_name, user_email, user_contact, user_adress, user_genre, user_skill } = req.body;
 
-    const userAdmin = await adminService.EditarAdmin(id_admin, name, email, phone_number, user_adress, user_genre, user_skill);
+    const userAdmin = await adminService.EditarAdmin(id_user, user_name, user_email, user_contact, user_adress, user_genre, user_skill);
 
     res.status(200).json(userAdmin);
 }

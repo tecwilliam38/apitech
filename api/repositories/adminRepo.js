@@ -82,15 +82,56 @@ async function ListarAdmin() {
     return userAdmin.rows;
 }
 
-async function EditarAdmin(id_admin, name, email, phone_number, user_adress, user_genre, user_skill) {
+// async function EditarAdmin(id_user, user_name, user_email, user_contact, user_adress, user_genre, user_skill) {
 
-    let sql = `update apitech_admin set name=$1, email=$2, phone_number=$3, user_adress=$4, user_genre=$5, user_skill=$6
-where id_admin = $7`;
+//     let sql = `update users set user_name=$1, user_email=$2, user_contact=$3, user_adress=$4, user_genre=$5, user_skill=$6
+// where id_user = $7`;
 
-    await pool.query(sql, [name, email, phone_number, user_adress, user_genre, user_skill, id_admin]);
-    return { id_admin };
+//     await pool.query(sql, [user_name, user_email, user_contact, user_adress, user_genre, user_skill, id_user]);
+//     return { id_user };
+// }
+
+async function EditarAdmin(
+    id_user,
+    user_name,
+    user_email,
+    user_contact,
+    user_adress,
+    user_genre,
+    user_skill
+) {
+    try {
+        const sql = `
+      UPDATE users
+      SET user_name   = $1,
+          user_email  = $2,
+          user_contact= $3,
+          user_adress = $4,
+          user_genre  = $5,
+          user_skill  = $6
+      WHERE id_user   = $7
+      RETURNING *;
+    `;
+
+        const values = [
+            user_name,
+            user_email,
+            user_contact,
+            user_adress,
+            user_genre,
+            user_skill,
+            id_user,
+        ];
+
+        const result = await pool.query(sql, values);
+
+        // retorna o registro atualizado
+        return result.rows[0];
+    } catch (error) {
+        console.error("Erro ao atualizar usuário:", error.message);
+        throw error; // relança o erro para ser tratado no controller
+    }
 }
-
 async function ExcluirAdmin(id_admin) {
 
     let sql = `delete from apitech_admin where id_admin=$1`;

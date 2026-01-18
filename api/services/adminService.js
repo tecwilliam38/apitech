@@ -39,9 +39,9 @@ async function ProfileAdmin(id_admin) {
 //     return userAdmin;
 // }
 
-async function EditarAdmin(id_admin, name, email, phone_number, user_adress, user_genre, user_skill) {
+async function EditarAdmin(id_user, user_name, user_email, user_contact, user_adress, user_genre, user_skill) {
 
-    const userAdmin = await adminRepo.EditarAdmin(id_admin, name, email, phone_number, user_adress, user_genre, user_skill);
+    const userAdmin = await adminRepo.EditarAdmin(id_user, user_name, user_email, user_contact, user_adress, user_genre, user_skill);
 
     return userAdmin;
 }
@@ -53,8 +53,11 @@ async function EditarAdmin(id_admin, name, email, phone_number, user_adress, use
 //     return userAdmin;
 // }
 
-export default{InserirAdmin, LoginAdmin,
-    ProfileAdmin
+export default {
+    InserirAdmin,
+    LoginAdmin,
+    ProfileAdmin,
+    EditarAdmin
 };
 
 
