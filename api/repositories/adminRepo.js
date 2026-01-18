@@ -81,12 +81,13 @@ async function ListarAdmin() {
     const userAdmin = await pool.query(sql, []);
     return userAdmin.rows;
 }
-async function EditarAdmin(id_admin, name, email, phone_number) {
 
-    let sql = `update apitech_admin set name=$1, email=$2, phone_number=$3
-where id_admin = $4`;
+async function EditarAdmin(id_admin, name, email, phone_number, user_adress, user_genre, user_skill) {
 
-    await pool.query(sql, [name, email, phone_number, id_admin]);
+    let sql = `update apitech_admin set name=$1, email=$2, phone_number=$3, user_adress=$4, user_genre=$5, user_skill=$6
+where id_admin = $7`;
+
+    await pool.query(sql, [name, email, phone_number, user_adress, user_genre, user_skill, id_admin]);
     return { id_admin };
 }
 

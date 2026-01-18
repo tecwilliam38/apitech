@@ -39,12 +39,12 @@ async function ProfileAdmin(id_admin) {
 //     return userAdmin;
 // }
 
-// async function EditarAdmin(id_admin, name, email, phone_number) {
+async function EditarAdmin(id_admin, name, email, phone_number, user_adress, user_genre, user_skill) {
 
-//     const userAdmin = await adminRepo.EditarAdmin(id_admin, name, email, phone_number);
+    const userAdmin = await adminRepo.EditarAdmin(id_admin, name, email, phone_number, user_adress, user_genre, user_skill);
 
-//     return userAdmin;
-// }
+    return userAdmin;
+}
 
 // async function ExcluirAdmin(id_admin) {
 
